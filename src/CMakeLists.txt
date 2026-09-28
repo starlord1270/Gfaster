@@ -7,6 +7,7 @@ if (BUILD_KINOTIFY)
     add_subdirectory(file)
     add_subdirectory(kioworkers)
     add_subdirectory(tools)
+    add_subdirectory(gui)
 endif()
 
 add_subdirectory(dbus)

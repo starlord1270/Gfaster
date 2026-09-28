@@ -63,6 +63,11 @@ package() {
   install -Dm755 "$SRC_DIR/baloo-rust/target/release/gfaster-rust" "$pkgdir/usr/bin/gfaster-rust"
   install -Dm644 "$SRC_DIR/gfaster.desktop" "$pkgdir/usr/share/applications/gfaster.desktop"
 
+  # Install App Icon & QML GUI Files
+  install -Dm644 "$SRC_DIR/gfaster_logo.png" "$pkgdir/usr/share/gfaster/gfaster_logo.png"
+  install -Dm644 "$SRC_DIR/gfaster_logo.png" "$pkgdir/usr/share/icons/hicolor/512x512/apps/gfaster.png"
+  install -Dm644 "$SRC_DIR/src/gui/main.qml" "$pkgdir/usr/share/gfaster/main.qml"
+
   # Install Explorer UI Assets
   install -d "$pkgdir/usr/share/gfaster/baloo-explorer"
   cp -r "$SRC_DIR/baloo-explorer/"* "$pkgdir/usr/share/gfaster/baloo-explorer/"
