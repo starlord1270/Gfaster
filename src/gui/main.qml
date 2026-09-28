@@ -31,12 +31,6 @@ ApplicationWindow {
         anchors.fill: parent
         color: bgBase
 
-        // Gradient Glow
-        RadialGradient {
-            anchors.fill: parent
-            visible: false
-        }
-
         RowLayout {
             anchors.fill: parent
             spacing: 0

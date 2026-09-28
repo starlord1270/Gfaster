@@ -2,6 +2,8 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QIcon>
+#include <QFile>
+#include <QDir>
 #include "filesystemmodel.h"
 
 int main(int argc, char *argv[])
@@ -21,12 +23,15 @@ int main(int argc, char *argv[])
                      &app, []() { QCoreApplication::exit(-1); },
                      Qt::QueuedConnection);
 
-    engine.load(QUrl::fromLocalFile(QStringLiteral("/usr/share/gfaster/main.qml")));
-
-    if (engine.rootObjects().isEmpty()) {
-        // Fallback for local build folder
-        engine.load(QUrl::fromLocalFile(QStringLiteral("./src/gui/main.qml")));
+    QString qmlPath = QStringLiteral("/usr/share/gfaster/main.qml");
+    if (!QFile::exists(qmlPath)) {
+        qmlPath = QStringLiteral("/run/media/starlord/Datos/fork-baloo/src/gui/main.qml");
     }
+    if (!QFile::exists(qmlPath)) {
+        qmlPath = QDir::homePath() + QStringLiteral("/.local/share/gfaster/main.qml");
+    }
+
+    engine.load(QUrl::fromLocalFile(qmlPath));
 
     return app.exec();
 }
