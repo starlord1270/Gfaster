@@ -1,21 +1,13 @@
 #!/bin/bash
 
-# GFaster Native Desktop App Launcher
-APP_PATH="/usr/share/gfaster/baloo-explorer/index.html"
+# GFaster Native C++ Qt6 Desktop Application Launcher
 
-# If local path exists in dev environment, prefer it
-if [ -f "/run/media/starlord/Datos/fork-baloo/baloo-explorer/index.html" ]; then
-    APP_PATH="/run/media/starlord/Datos/fork-baloo/baloo-explorer/index.html"
-fi
-
-URL="file://${APP_PATH}"
-
-if command -v google-chrome &> /dev/null; then
-    exec google-chrome --app="${URL}" --name="GFaster File Manager" --class="GFaster" "$@"
-elif command -v zen-browser &> /dev/null; then
-    exec zen-browser --new-window "${URL}" "$@"
-elif command -v chromium &> /dev/null; then
-    exec chromium --app="${URL}" --name="GFaster File Manager" "$@"
+if [ -f "/usr/bin/gfaster-gui" ]; then
+    exec /usr/bin/gfaster-gui "$@"
+elif [ -f "./build/bin/gfaster-gui" ]; then
+    exec ./build/bin/gfaster-gui "$@"
+elif command -v qml6 &> /dev/null; then
+    exec qml6 /usr/share/gfaster/main.qml "$@"
 else
-    exec xdg-open "${URL}"
+    exec qml /usr/share/gfaster/main.qml "$@"
 fi
