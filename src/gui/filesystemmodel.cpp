@@ -83,21 +83,35 @@ void FileSystemModel::openParentDir()
 void FileSystemModel::openFile(const QString &path)
 {
     QFileInfo fi(path);
-    if (!fi.exists())
+    if (!fi.exists()) {
+        qWarning() << "[GFaster] File does not exist:" << path;
         return;
+    }
 
-    if (fi.isExecutable() && !fi.isDir()) {
-        QProcess::startDetached(path, QStringList());
-    } else {
-        bool ok = QProcess::startDetached(QStringLiteral("xdg-open"), QStringList() << path);
-        if (!ok) {
-            QDesktopServices::openUrl(QUrl::fromLocalFile(path));
-        }
+    qDebug() << "[GFaster] Launching file via xdg-open:" << path;
+
+    QString ext = fi.suffix().toLower();
+
+    // Direct binary/script execution only for explicit executable extensions
+    if ((ext == QLatin1String("sh") || ext == QLatin1String("appimage") || ext == QLatin1String("run") || ext == QLatin1String("bin")) && fi.isExecutable()) {
+        bool started = QProcess::startDetached(path, QStringList());
+        qDebug() << "[GFaster] Executed script/binary:" << path << "Result:" << started;
+        if (started)
+            return;
+    }
+
+    // Default system application launcher (xdg-open) for videos, images, audio, docs, etc.
+    bool ok = QProcess::startDetached(QStringLiteral("xdg-open"), QStringList() << path);
+    qDebug() << "[GFaster] Launched xdg-open for:" << path << "Result:" << ok;
+
+    if (!ok) {
+        QDesktopServices::openUrl(QUrl::fromLocalFile(path));
     }
 }
 
 void FileSystemModel::openItem(const QString &path, bool isDir)
 {
+    qDebug() << "[GFaster] openItem clicked:" << path << "isDir:" << isDir;
     if (isDir) {
         loadDirectory(path);
     } else {

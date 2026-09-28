@@ -337,13 +337,17 @@ ApplicationWindow {
                             hoverEnabled: true
                             acceptedButtons: Qt.LeftButton | Qt.RightButton
 
-                            onDoubleClicked: (mouse) => {
-                                fsModel.openItem(path, isDir)
+                            onClicked: (mouse) => {
+                                if (mouse.button === Qt.LeftButton) {
+                                    fsModel.openItem(path, isDir)
+                                } else if (mouse.button === Qt.RightButton) {
+                                    itemContextMenu.popup()
+                                }
                             }
 
-                            onClicked: (mouse) => {
-                                if (mouse.button === Qt.RightButton) {
-                                    itemContextMenu.popup()
+                            onDoubleClicked: (mouse) => {
+                                if (mouse.button === Qt.LeftButton) {
+                                    fsModel.openItem(path, isDir)
                                 }
                             }
 
@@ -364,6 +368,7 @@ ApplicationWindow {
                                 }
                             }
                         }
+
                     }
                 }
             }
