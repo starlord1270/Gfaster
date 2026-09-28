@@ -27,8 +27,10 @@ enum Commands {
     /// Buscar archivos instantáneamente por nombre o extensión
     Search {
         query: String,
-        #[arg(short, long, default_value_t = 50)]
+        #[arg(short, long, default_value_t = 100)]
         limit: usize,
+        #[arg(short, long)]
+        raw: bool,
     },
     /// Mostrar estadísticas de la base de datos de indexación
     Stats,
@@ -62,23 +64,30 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             println!("   - Tamaño total: {} MB", stats.bytes_indexed / 1_048_576);
             println!("   - Tiempo transcurrido: {} ms", stats.elapsed_ms);
         }
-        Commands::Search { query, limit } => {
+        Commands::Search { query, limit, raw } => {
             let start = std::time::Instant::now();
             let results = db.search_filename(&query);
             let elapsed = start.elapsed().as_micros();
 
-            println!("🔎 Resultados de búsqueda para '{}' ({} µs):", query, elapsed);
-            for (i, item) in results.iter().take(limit).enumerate() {
-                println!(
-                    " {:3}. [{}] {} ({:.2} KB)",
-                    i + 1,
-                    item.mime_type,
-                    item.path,
-                    item.size_bytes as f64 / 1024.0
-                );
+            if raw {
+                for item in results.iter().take(limit) {
+                    println!("{}", item.path);
+                }
+            } else {
+                println!("🔎 Resultados de búsqueda para '{}' ({} µs):", query, elapsed);
+                for (i, item) in results.iter().take(limit).enumerate() {
+                    println!(
+                        " {:3}. [{}] {} ({:.2} KB)",
+                        i + 1,
+                        item.mime_type,
+                        item.path,
+                        item.size_bytes as f64 / 1024.0
+                    );
+                }
+                println!("Total mostrados: {}", results.len().min(limit));
             }
-            println!("Total mostrados: {}", results.len().min(limit));
         }
+
         Commands::Stats => {
             println!("📊 Estadísticas del Indexador Rust:");
             println!("   - Entradas totales en DB: {}", db.count());
