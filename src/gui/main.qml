@@ -323,6 +323,8 @@ ApplicationWindow {
                     cellHeight: Math.round(160 * zoomScale)
                     clip: true
                     model: fsModel
+                    highlight: null
+                    highlightFollowsCurrentItem: false
 
                     // Right ScrollBar for vertical scrolling
                     ScrollBar.vertical: ScrollBar {
@@ -348,7 +350,8 @@ ApplicationWindow {
                         height: Math.round(145 * zoomScale)
                         color: mouseArea.containsMouse ? bgCardHover : bgCard
                         radius: Math.round(14 * zoomScale)
-                        border.width: 0  // Frameless card
+                        border.color: mouseArea.containsMouse ? wineRedNeon : "transparent"
+                        border.width: mouseArea.containsMouse ? 1 : 0
 
                         // Extension Badge Pill (Top-Right of file card)
                         Rectangle {
