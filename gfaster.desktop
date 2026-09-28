@@ -2,8 +2,8 @@
 Name=GFaster File Manager
 GenericName=Gestor de Archivos
 Comment=Gestor de archivos ultrarrápido con motor en Rust y tema oscuro
-Exec=gfaster-gui %U
-Icon=system-file-manager
+Exec=gfaster-app %U
+Icon=gfaster
 Terminal=false
 Type=Application
 Categories=System;FileTools;FileManager;Qt;KDE;Utility;
@@ -14,4 +14,4 @@ Actions=new-window;
 
 [Desktop Action new-window]
 Name=Nueva ventana de GFaster
-Exec=gfaster-gui %U
+Exec=gfaster-app %U

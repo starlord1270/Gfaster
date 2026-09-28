@@ -65,6 +65,7 @@ package() {
 
   # Install App Icon & QML GUI Files
   install -Dm644 "$SRC_DIR/gfaster_logo.png" "$pkgdir/usr/share/gfaster/gfaster_logo.png"
+  install -Dm644 "$SRC_DIR/gfaster_logo.png" "$pkgdir/usr/share/pixmaps/gfaster.png"
   install -Dm644 "$SRC_DIR/gfaster_logo.png" "$pkgdir/usr/share/icons/hicolor/512x512/apps/gfaster.png"
   install -Dm644 "$SRC_DIR/src/gui/main.qml" "$pkgdir/usr/share/gfaster/main.qml"
 

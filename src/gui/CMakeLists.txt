@@ -1,10 +1,10 @@
-add_executable(gfaster-gui
+add_executable(gfaster-app
     main.cpp
     filesystemmodel.cpp
     filesystemmodel.h
 )
 
-target_link_libraries(gfaster-gui
+target_link_libraries(gfaster-app
     PRIVATE
         Qt6::Core
         Qt6::Gui
@@ -13,4 +13,4 @@ target_link_libraries(gfaster-gui
         Qt6::QuickControls2
 )
 
-install(TARGETS gfaster-gui ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS gfaster-app ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
