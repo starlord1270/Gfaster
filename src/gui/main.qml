@@ -348,7 +348,7 @@ ApplicationWindow {
                         id: cardDelegate
                         width: Math.round(160 * zoomScale)
                         height: Math.round(145 * zoomScale)
-                        color: mouseArea.containsMouse ? bgCardHover : bgCard
+                        color: mouseArea.containsMouse ? bgCardHover : "transparent"
                         radius: Math.round(14 * zoomScale)
                         border.color: mouseArea.containsMouse ? wineRedNeon : "transparent"
                         border.width: mouseArea.containsMouse ? 1 : 0
