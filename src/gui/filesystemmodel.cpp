@@ -8,17 +8,9 @@
 #include <QStandardPaths>
 #include <QStorageInfo>
 
-QVariantList FileSystemModel::getOpenWithApps(const QString &path)
+void FileSystemModel::scanDesktopApps()
 {
-    QVariantList result;
-    QFileInfo fi(path);
-    if (!fi.exists())
-        return result;
-
-    QMimeDatabase mimeDb;
-    QMimeType fileMime = mimeDb.mimeTypeForFile(path);
-    QString mimeName = fileMime.name().toLower();
-    QString ext = fi.suffix().toLower();
+    m_systemAppsCache.clear();
 
     QStringList searchDirs = {QStringLiteral("/usr/share/applications"),
                               QStringLiteral("/usr/local/share/applications"),
@@ -27,14 +19,6 @@ QVariantList FileSystemModel::getOpenWithApps(const QString &path)
                               QDir::homePath() + QStringLiteral("/.local/share/flatpak/exports/share/applications")};
 
     QSet<QString> seenKeys;
-
-    struct AppItem {
-        QString name;
-        QString cmd;
-        QString icon;
-        bool isRecommended;
-    };
-    QList<AppItem> appList;
 
     for (const QString &dirPath : searchDirs) {
         QDir dir(dirPath);
@@ -87,34 +71,69 @@ QVariantList FileSystemModel::getOpenWithApps(const QString &path)
                 continue;
             seenKeys.insert(key);
 
-            bool isRecommended = false;
+            SystemAppInfo info;
+            info.name = name;
+            info.cmd = cleanCmd;
+            info.icon = iconStr;
             if (!mimeTypesStr.isEmpty()) {
-                QStringList mimes = mimeTypesStr.split(QLatin1Char(';'), Qt::SkipEmptyParts);
-                for (const QString &m : mimes) {
-                    QString mLower = m.trimmed().toLower();
-                    if ((!mimeName.isEmpty() && mLower == mimeName) || (!ext.isEmpty() && mLower.contains(ext))) {
-                        isRecommended = true;
-                        break;
-                    }
+                const QStringList parts = mimeTypesStr.split(QLatin1Char(';'), Qt::SkipEmptyParts);
+                for (const QString &p : parts) {
+                    info.mimeTypes.append(p.trimmed().toLower());
                 }
             }
-
-            // Browser matching helper
-            if (ext == QLatin1String("html") || ext == QLatin1String("htm") || ext == QLatin1String("url") || mimeName.contains(QStringLiteral("html"))) {
-                if (cleanCmd.contains(QStringLiteral("chrome")) || cleanCmd.contains(QStringLiteral("firefox")) || cleanCmd.contains(QStringLiteral("edge"))
-                    || cleanCmd.contains(QStringLiteral("brave")) || cleanCmd.contains(QStringLiteral("vivaldi"))
-                    || cleanCmd.contains(QStringLiteral("opera"))) {
-                    isRecommended = true;
-                }
-            }
-
-            AppItem item;
-            item.name = name;
-            item.cmd = cleanCmd;
-            item.icon = iconStr;
-            item.isRecommended = isRecommended;
-            appList.append(item);
+            m_systemAppsCache.append(info);
         }
+    }
+}
+
+QVariantList FileSystemModel::getOpenWithApps(const QString &path)
+{
+    QVariantList result;
+    QFileInfo fi(path);
+    if (!fi.exists())
+        return result;
+
+    if (m_systemAppsCache.isEmpty()) {
+        scanDesktopApps();
+    }
+
+    QMimeDatabase mimeDb;
+    QMimeType fileMime = mimeDb.mimeTypeForFile(path);
+    QString mimeName = fileMime.name().toLower();
+    QString ext = fi.suffix().toLower();
+
+    struct AppItem {
+        QString name;
+        QString cmd;
+        QString icon;
+        bool isRecommended;
+    };
+    QList<AppItem> appList;
+    appList.reserve(m_systemAppsCache.size());
+
+    for (const SystemAppInfo &app : m_systemAppsCache) {
+        bool isRecommended = false;
+        for (const QString &m : app.mimeTypes) {
+            if ((!mimeName.isEmpty() && m == mimeName) || (!ext.isEmpty() && m.contains(ext))) {
+                isRecommended = true;
+                break;
+            }
+        }
+
+        // Browser matching helper
+        if (ext == QLatin1String("html") || ext == QLatin1String("htm") || ext == QLatin1String("url") || mimeName.contains(QStringLiteral("html"))) {
+            if (app.cmd.contains(QStringLiteral("chrome")) || app.cmd.contains(QStringLiteral("firefox")) || app.cmd.contains(QStringLiteral("edge"))
+                || app.cmd.contains(QStringLiteral("brave")) || app.cmd.contains(QStringLiteral("vivaldi")) || app.cmd.contains(QStringLiteral("opera"))) {
+                isRecommended = true;
+            }
+        }
+
+        AppItem item;
+        item.name = app.name;
+        item.cmd = app.cmd;
+        item.icon = app.icon;
+        item.isRecommended = isRecommended;
+        appList.append(item);
     }
 
     std::sort(appList.begin(), appList.end(), [](const AppItem &a, const AppItem &b) {
@@ -182,6 +201,8 @@ FileSystemModel::FileSystemModel(QObject *parent)
     m_searchTimer->setSingleShot(true);
     connect(m_searchTimer, &QTimer::timeout, this, &FileSystemModel::performSearch);
     connect(m_searchProcess, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &FileSystemModel::onSearchProcessFinished);
+
+    scanDesktopApps();
 
     QString homePath = QDir::homePath();
     loadDirectory(homePath);

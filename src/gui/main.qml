@@ -448,7 +448,8 @@ ApplicationWindow {
                                     MenuSeparator {}
 
                                     Instantiator {
-                                        model: fsModel.getOpenWithApps(path)
+                                        active: openWithMenu.opened
+                                        model: openWithMenu.opened ? fsModel.getOpenWithApps(path) : []
                                         onObjectAdded: (index, object) => openWithMenu.insertItem(index + 3, object)
                                         onObjectRemoved: (index, object) => openWithMenu.removeItem(object)
                                         delegate: MenuItem {

@@ -75,10 +75,19 @@ private Q_SLOTS:
 private:
     void loadDirectory(const QString &path);
     QString formatSize(qint64 bytes) const;
+    void scanDesktopApps();
+
+    struct SystemAppInfo {
+        QString name;
+        QString cmd;
+        QString icon;
+        QStringList mimeTypes;
+    };
 
     QString m_currentPath;
     QString m_freeSpaceStr;
     QList<FileItem> m_items;
+    QList<SystemAppInfo> m_systemAppsCache;
 
     QProcess *m_searchProcess;
     QTimer *m_searchTimer;
