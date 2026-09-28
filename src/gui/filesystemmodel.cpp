@@ -234,6 +234,7 @@ void FileSystemModel::performSearch()
     // 2. Asynchronously run gfaster-rust in background
     if (m_searchProcess->state() != QProcess::NotRunning) {
         m_searchProcess->kill();
+        m_searchProcess->waitForFinished(50);
     }
 
     QString rustBinary = QStringLiteral("gfaster-rust");
