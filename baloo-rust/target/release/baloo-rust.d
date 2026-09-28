@@ -1,0 +1,1 @@
+/run/media/starlord/Datos/fork-baloo/baloo-rust/target/release/baloo-rust: /run/media/starlord/Datos/fork-baloo/baloo-rust/src/db.rs /run/media/starlord/Datos/fork-baloo/baloo-rust/src/indexer.rs /run/media/starlord/Datos/fork-baloo/baloo-rust/src/main.rs

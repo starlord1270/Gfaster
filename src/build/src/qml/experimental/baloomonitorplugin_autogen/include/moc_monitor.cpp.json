@@ -1,0 +1,270 @@
+{
+    "classes": [
+        {
+            "classInfos": [
+                {
+                    "name": "QML.Element",
+                    "value": "Global"
+                },
+                {
+                    "name": "QML.Foreign",
+                    "value": "Baloo"
+                },
+                {
+                    "name": "QML.ForeignIsNamespace",
+                    "value": "true"
+                }
+            ],
+            "className": "BalooForeign",
+            "gadget": true,
+            "lineNumber": 20,
+            "qualifiedClassName": "BalooForeign"
+        },
+        {
+            "classInfos": [
+                {
+                    "name": "QML.Element",
+                    "value": "auto"
+                }
+            ],
+            "className": "Monitor",
+            "lineNumber": 27,
+            "methods": [
+                {
+                    "access": "public",
+                    "index": 8,
+                    "lineNumber": 51,
+                    "name": "toggleSuspendState",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 9,
+                    "lineNumber": 52,
+                    "name": "startBaloo",
+                    "returnType": "void"
+                }
+            ],
+            "object": true,
+            "properties": [
+                {
+                    "constant": false,
+                    "designable": true,
+                    "final": false,
+                    "index": 0,
+                    "lineNumber": 32,
+                    "name": "filePath",
+                    "notify": "newFileIndexed",
+                    "override": false,
+                    "read": "filePath",
+                    "required": false,
+                    "scriptable": true,
+                    "stored": true,
+                    "type": "QString",
+                    "user": false,
+                    "virtual": false
+                },
+                {
+                    "constant": false,
+                    "designable": true,
+                    "final": false,
+                    "index": 1,
+                    "lineNumber": 33,
+                    "name": "suspendState",
+                    "notify": "indexerStateChanged",
+                    "override": false,
+                    "read": "suspendState",
+                    "required": false,
+                    "scriptable": true,
+                    "stored": true,
+                    "type": "QString",
+                    "user": false,
+                    "virtual": false
+                },
+                {
+                    "constant": false,
+                    "designable": true,
+                    "final": false,
+                    "index": 2,
+                    "lineNumber": 34,
+                    "member": "m_balooRunning",
+                    "name": "balooRunning",
+                    "notify": "balooStateChanged",
+                    "override": false,
+                    "required": false,
+                    "scriptable": true,
+                    "stored": true,
+                    "type": "bool",
+                    "user": false,
+                    "virtual": false
+                },
+                {
+                    "constant": false,
+                    "designable": true,
+                    "final": false,
+                    "index": 3,
+                    "lineNumber": 35,
+                    "member": "m_totalFiles",
+                    "name": "totalFiles",
+                    "notify": "totalFilesChanged",
+                    "override": false,
+                    "required": false,
+                    "scriptable": true,
+                    "stored": true,
+                    "type": "uint",
+                    "user": false,
+                    "virtual": false
+                },
+                {
+                    "constant": false,
+                    "designable": true,
+                    "final": false,
+                    "index": 4,
+                    "lineNumber": 36,
+                    "member": "m_filesIndexed",
+                    "name": "filesIndexed",
+                    "notify": "newFileIndexed",
+                    "override": false,
+                    "required": false,
+                    "scriptable": true,
+                    "stored": true,
+                    "type": "uint",
+                    "user": false,
+                    "virtual": false
+                },
+                {
+                    "constant": false,
+                    "designable": true,
+                    "final": false,
+                    "index": 5,
+                    "lineNumber": 37,
+                    "name": "remainingTime",
+                    "notify": "remainingTimeChanged",
+                    "override": false,
+                    "read": "remainingTime",
+                    "required": false,
+                    "scriptable": true,
+                    "stored": true,
+                    "type": "QString",
+                    "user": false,
+                    "virtual": false
+                },
+                {
+                    "constant": false,
+                    "designable": true,
+                    "final": false,
+                    "index": 6,
+                    "lineNumber": 38,
+                    "name": "stateString",
+                    "notify": "indexerStateChanged",
+                    "override": false,
+                    "read": "stateString",
+                    "required": false,
+                    "scriptable": true,
+                    "stored": true,
+                    "type": "QString",
+                    "user": false,
+                    "virtual": false
+                },
+                {
+                    "constant": false,
+                    "designable": true,
+                    "final": false,
+                    "index": 7,
+                    "lineNumber": 39,
+                    "name": "state",
+                    "notify": "indexerStateChanged",
+                    "override": false,
+                    "read": "state",
+                    "required": false,
+                    "scriptable": true,
+                    "stored": true,
+                    "type": "Baloo::IndexerState",
+                    "user": false,
+                    "virtual": false
+                }
+            ],
+            "qualifiedClassName": "Baloo::Monitor",
+            "signals": [
+                {
+                    "access": "public",
+                    "index": 0,
+                    "lineNumber": 55,
+                    "name": "newFileIndexed",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 1,
+                    "lineNumber": 56,
+                    "name": "balooStateChanged",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 2,
+                    "lineNumber": 57,
+                    "name": "totalFilesChanged",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 3,
+                    "lineNumber": 58,
+                    "name": "remainingTimeChanged",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 4,
+                    "lineNumber": 59,
+                    "name": "indexerStateChanged",
+                    "returnType": "void"
+                }
+            ],
+            "slots": [
+                {
+                    "access": "private",
+                    "arguments": [
+                        {
+                            "name": "filePath",
+                            "type": "QString"
+                        }
+                    ],
+                    "index": 5,
+                    "lineNumber": 62,
+                    "name": "newFile",
+                    "returnType": "void"
+                },
+                {
+                    "access": "private",
+                    "index": 6,
+                    "lineNumber": 63,
+                    "name": "balooStarted",
+                    "returnType": "void"
+                },
+                {
+                    "access": "private",
+                    "arguments": [
+                        {
+                            "name": "state",
+                            "type": "int"
+                        }
+                    ],
+                    "index": 7,
+                    "lineNumber": 64,
+                    "name": "slotIndexerStateChanged",
+                    "returnType": "void"
+                }
+            ],
+            "superClasses": [
+                {
+                    "access": "public",
+                    "name": "QObject"
+                }
+            ]
+        }
+    ],
+    "inputFile": "monitor.h",
+    "outputRevision": 69
+}

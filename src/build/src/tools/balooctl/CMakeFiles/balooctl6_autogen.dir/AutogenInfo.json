@@ -1,0 +1,242 @@
+{
+	"BUILD_DIR" : "/run/media/starlord/Datos/fork-baloo/src/build/src/tools/balooctl/balooctl6_autogen",
+	"CMAKE_BINARY_DIR" : "/run/media/starlord/Datos/fork-baloo/src/build",
+	"CMAKE_CURRENT_BINARY_DIR" : "/run/media/starlord/Datos/fork-baloo/src/build/src/tools/balooctl",
+	"CMAKE_CURRENT_SOURCE_DIR" : "/run/media/starlord/Datos/fork-baloo/src/tools/balooctl",
+	"CMAKE_EXECUTABLE" : "/usr/bin/cmake",
+	"CMAKE_LIST_FILES" : 
+	[
+		"/run/media/starlord/Datos/fork-baloo/src/tools/balooctl/CMakeLists.txt"
+	],
+	"CMAKE_SOURCE_DIR" : "/run/media/starlord/Datos/fork-baloo",
+	"CROSS_CONFIG" : false,
+	"DEP_FILE" : "/run/media/starlord/Datos/fork-baloo/src/build/src/tools/balooctl/balooctl6_autogen/deps",
+	"DEP_FILE_RULE_NAME" : "balooctl6_autogen/timestamp",
+	"HEADERS" : 
+	[
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/file/extractor/result.h",
+			"Mu",
+			"N6QACXO3PN/moc_result.cpp",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/tools/balooctl/clearcommand.h",
+			"Mu",
+			"EWIEGA46WW/moc_clearcommand.cpp",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/tools/balooctl/clearentry.h",
+			"Mu",
+			"EWIEGA46WW/moc_clearentry.cpp",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/tools/balooctl/command.h",
+			"Mu",
+			"EWIEGA46WW/moc_command.cpp",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/tools/balooctl/configcommand.h",
+			"Mu",
+			"EWIEGA46WW/moc_configcommand.cpp",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/tools/balooctl/indexcommand.h",
+			"Mu",
+			"EWIEGA46WW/moc_indexcommand.cpp",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/tools/balooctl/indexentry.h",
+			"Mu",
+			"EWIEGA46WW/moc_indexentry.cpp",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/tools/balooctl/indexer.h",
+			"Mu",
+			"EWIEGA46WW/moc_indexer.cpp",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/tools/balooctl/monitorcommand.h",
+			"Mu",
+			"EWIEGA46WW/moc_monitorcommand.cpp",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/tools/balooctl/statuscommand.h",
+			"Mu",
+			"EWIEGA46WW/moc_statuscommand.cpp",
+			null
+		]
+	],
+	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
+	"INCLUDE_DIR" : "/run/media/starlord/Datos/fork-baloo/src/build/src/tools/balooctl/balooctl6_autogen/include",
+	"MOC_COMPILATION_FILE" : "/run/media/starlord/Datos/fork-baloo/src/build/src/tools/balooctl/balooctl6_autogen/mocs_compilation.cpp",
+	"MOC_DEFINITIONS" : 
+	[
+		"BALOO_CORE_DEPRECATED_WARNINGS_SINCE=0x0",
+		"BALOO_CORE_DISABLE_DEPRECATED_BEFORE_AND_AT=0x0",
+		"KCOREADDONS_LIB",
+		"KF_DEPRECATED_WARNINGS_SINCE=0x70000",
+		"KF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x61b00",
+		"PROJECT_VERSION=\"6.30.0\"",
+		"QT_CORE_LIB",
+		"QT_DBUS_LIB",
+		"QT_DEPRECATED_WARNINGS_SINCE=0x70000",
+		"QT_DISABLE_DEPRECATED_BEFORE=0x60b00",
+		"QT_NO_CAST_FROM_ASCII",
+		"QT_NO_CAST_FROM_BYTEARRAY",
+		"QT_NO_CAST_TO_ASCII",
+		"QT_NO_DEBUG",
+		"QT_NO_FOREACH",
+		"QT_NO_KEYWORDS",
+		"QT_NO_NARROWING_CONVERSIONS_IN_CONNECT",
+		"QT_NO_URL_CAST_FROM_STRING",
+		"QT_STRICT_ITERATORS",
+		"QT_USE_QSTRINGBUILDER",
+		"TRANSLATION_DOMAIN=\"balooctl6\"",
+		"_GNU_SOURCE",
+		"_LARGEFILE64_SOURCE"
+	],
+	"MOC_DEPEND_FILTERS" : 
+	[
+		[
+			"Q_PLUGIN_METADATA",
+			"[\n][ \t]*Q_PLUGIN_METADATA[ \t]*\\([^\\)]*FILE[ \t]*\"([^\"]+)\""
+		]
+	],
+	"MOC_INCLUDES" : 
+	[
+		"/run/media/starlord/Datos/fork-baloo/src/build/src/tools/balooctl",
+		"/run/media/starlord/Datos/fork-baloo/src/tools/balooctl",
+		"/run/media/starlord/Datos/fork-baloo/src/build",
+		"/run/media/starlord/Datos/fork-baloo",
+		"/run/media/starlord/Datos/fork-baloo/src/lib",
+		"/run/media/starlord/Datos/fork-baloo/src/build/src/lib",
+		"/run/media/starlord/Datos/fork-baloo/src/build/src/codecs",
+		"/run/media/starlord/Datos/fork-baloo/src/codecs",
+		"/run/media/starlord/Datos/fork-baloo/src/build/src/engine",
+		"/run/media/starlord/Datos/fork-baloo/src/engine",
+		"/run/media/starlord/Datos/fork-baloo/src/build/src/file",
+		"/run/media/starlord/Datos/fork-baloo/src/file",
+		"/run/media/starlord/Datos/fork-baloo/src/build/src/dbus",
+		"/run/media/starlord/Datos/fork-baloo/src/dbus",
+		"/usr/include/qt6/QtDBus",
+		"/usr/include/qt6",
+		"/usr/include/qt6/QtCore",
+		"/usr/lib/qt6/mkspecs/linux-g++",
+		"/usr/include/KF6/KCoreAddons",
+		"/usr/include/KF6/KConfig",
+		"/usr/include/KF6/KConfigCore",
+		"/usr/include/KF6/KI18n",
+		"/usr/include/KF6/KFileMetaData",
+		"/usr/include/KF6/Solid",
+		"/usr/include",
+		"/usr/include/c++/16",
+		"/usr/include/c++/16/x86_64-pc-linux-gnu",
+		"/usr/include/c++/16/backward",
+		"/usr/lib/gcc/x86_64-pc-linux-gnu/16/include",
+		"/usr/local/include"
+	],
+	"MOC_MACRO_NAMES" : 
+	[
+		"Q_OBJECT",
+		"Q_GADGET",
+		"Q_NAMESPACE",
+		"Q_NAMESPACE_EXPORT",
+		"Q_GADGET_EXPORT",
+		"Q_ENUM_NS",
+		"K_PLUGIN_FACTORY",
+		"K_PLUGIN_CLASS",
+		"K_PLUGIN_FACTORY_WITH_JSON",
+		"K_PLUGIN_CLASS_WITH_JSON"
+	],
+	"MOC_OPTIONS" : [],
+	"MOC_PATH_PREFIX" : false,
+	"MOC_PREDEFS_CMD" : 
+	[
+		"/usr/bin/c++",
+		"-std=c++20",
+		"-w",
+		"-dM",
+		"-E",
+		"/usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp"
+	],
+	"MOC_PREDEFS_FILE" : "/run/media/starlord/Datos/fork-baloo/src/build/src/tools/balooctl/balooctl6_autogen/moc_predefs.h",
+	"MOC_RELAXED_MODE" : false,
+	"MOC_SKIP" : [],
+	"MULTI_CONFIG" : false,
+	"PARALLEL" : 4,
+	"PARSE_CACHE_FILE" : "/run/media/starlord/Datos/fork-baloo/src/build/src/tools/balooctl/CMakeFiles/balooctl6_autogen.dir/ParseCache.txt",
+	"QT_MOC_EXECUTABLE" : "/usr/lib/qt6/moc",
+	"QT_UIC_EXECUTABLE" : "",
+	"QT_VERSION_MAJOR" : 6,
+	"QT_VERSION_MINOR" : 11,
+	"SETTINGS_FILE" : "/run/media/starlord/Datos/fork-baloo/src/build/src/tools/balooctl/CMakeFiles/balooctl6_autogen.dir/AutogenUsed.txt",
+	"SOURCES" : 
+	[
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/file/extractor/result.cpp",
+			"Mu",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/tools/balooctl/clearcommand.cpp",
+			"Mu",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/tools/balooctl/clearentry.cpp",
+			"Mu",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/tools/balooctl/command.cpp",
+			"Mu",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/tools/balooctl/configcommand.cpp",
+			"Mu",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/tools/balooctl/indexcommand.cpp",
+			"Mu",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/tools/balooctl/indexentry.cpp",
+			"Mu",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/tools/balooctl/indexer.cpp",
+			"Mu",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/tools/balooctl/main.cpp",
+			"Mu",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/tools/balooctl/monitorcommand.cpp",
+			"Mu",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/tools/balooctl/statuscommand.cpp",
+			"Mu",
+			null
+		]
+	],
+	"USE_BETTER_GRAPH" : true,
+	"VERBOSITY" : 0
+}

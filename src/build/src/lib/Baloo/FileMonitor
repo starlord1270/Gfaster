@@ -1,0 +1,1 @@
+#include "baloo/filemonitor.h" // IWYU pragma: export

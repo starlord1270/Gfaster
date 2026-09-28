@@ -1,0 +1,373 @@
+{
+	"BUILD_DIR" : "/run/media/starlord/Datos/fork-baloo/src/build/src/lib/KF6Baloo_autogen",
+	"CMAKE_BINARY_DIR" : "/run/media/starlord/Datos/fork-baloo/src/build",
+	"CMAKE_CURRENT_BINARY_DIR" : "/run/media/starlord/Datos/fork-baloo/src/build/src/lib",
+	"CMAKE_CURRENT_SOURCE_DIR" : "/run/media/starlord/Datos/fork-baloo/src/lib",
+	"CMAKE_EXECUTABLE" : "/usr/bin/cmake",
+	"CMAKE_LIST_FILES" : 
+	[
+		"/run/media/starlord/Datos/fork-baloo/src/lib/CMakeLists.txt",
+		"/usr/share/ECM/modules/ECMQtDeclareLoggingCategory.cpp.in",
+		"/usr/share/ECM/modules/ECMQtDeclareLoggingCategory.h.in",
+		"/usr/share/cmake/Modules/exportheader.cmake.in",
+		"/usr/lib/cmake/Qt6Tools/Qt6ToolsConfigVersion.cmake",
+		"/usr/lib/cmake/Qt6Tools/Qt6ToolsConfigVersionImpl.cmake",
+		"/usr/lib/cmake/Qt6Tools/Qt6ToolsConfig.cmake",
+		"/usr/share/cmake/Modules/CMakeFindDependencyMacro.cmake",
+		"/usr/lib/cmake/Qt6Tools/Qt6ToolsDependencies.cmake",
+		"/usr/lib/cmake/Qt6ToolsTools/Qt6ToolsToolsConfigVersion.cmake",
+		"/usr/lib/cmake/Qt6ToolsTools/Qt6ToolsToolsConfigVersionImpl.cmake",
+		"/usr/lib/cmake/Qt6ToolsTools/Qt6ToolsToolsConfig.cmake",
+		"/usr/share/cmake/Modules/CMakeFindDependencyMacro.cmake",
+		"/usr/lib/cmake/Qt6ToolsTools/Qt6ToolsToolsDependencies.cmake",
+		"/usr/lib/cmake/Qt6ToolsTools/Qt6ToolsToolsTargetsPrecheck.cmake",
+		"/usr/lib/cmake/Qt6ToolsTools/Qt6ToolsToolsTargets.cmake",
+		"/usr/lib/cmake/Qt6ToolsTools/Qt6ToolsToolsTargets-relwithdebinfo.cmake",
+		"/usr/lib/cmake/Qt6ToolsTools/Qt6ToolsToolsAdditionalTargetInfo.cmake",
+		"/usr/lib/cmake/Qt6ToolsTools/Qt6ToolsToolsVersionlessTargets.cmake",
+		"/usr/lib/cmake/Qt6Tools/Qt6ToolsTargetsPrecheck.cmake",
+		"/usr/lib/cmake/Qt6Tools/Qt6ToolsTargets.cmake",
+		"/usr/lib/cmake/Qt6Tools/Qt6ToolsAdditionalTargetInfo.cmake",
+		"/usr/lib/cmake/Qt6Tools/Qt6ToolsExtraProperties.cmake",
+		"/usr/lib/cmake/Qt6Tools/Qt6ToolsVersionlessAliasTargets.cmake",
+		"/usr/lib/cmake/Qt6/Qt6ConfigVersion.cmake",
+		"/usr/lib/cmake/Qt6/Qt6ConfigVersionImpl.cmake",
+		"/usr/lib/cmake/Qt6/Qt6Config.cmake",
+		"/usr/lib/cmake/Qt6/QtPublicCMakeIncludeGuardHelpers.cmake",
+		"/usr/lib/cmake/Qt6/QtPublicCMakeEarlyPolicyHelpers.cmake",
+		"/usr/lib/cmake/Qt6/QtPublicCMakeHelpers.cmake",
+		"/usr/lib/cmake/Qt6/Qt6ConfigExtras.cmake",
+		"/usr/lib/cmake/Qt6/QtPublicCMakeVersionHelpers.cmake",
+		"/usr/lib/cmake/Qt6/QtInstallPaths.cmake",
+		"/usr/lib/cmake/Qt6/Qt6TargetsPrecheck.cmake",
+		"/usr/lib/cmake/Qt6/QtFeature.cmake",
+		"/usr/share/cmake/Modules/CheckCXXCompilerFlag.cmake",
+		"/usr/lib/cmake/Qt6/QtFeatureCommon.cmake",
+		"/usr/lib/cmake/Qt6/QtPublicAndroidHelpers.cmake",
+		"/usr/lib/cmake/Qt6/QtPublicAppleHelpers.cmake",
+		"/usr/lib/cmake/Qt6/QtPublicCMakeHelpers.cmake",
+		"/usr/lib/cmake/Qt6/QtPublicCMakeVersionHelpers.cmake",
+		"/usr/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake",
+		"/usr/lib/cmake/Qt6/QtPublicExternalProjectHelpers.cmake",
+		"/usr/lib/cmake/Qt6/QtPublicFinalizerHelpers.cmake",
+		"/usr/lib/cmake/Qt6/QtPublicFindPackageHelpers.cmake",
+		"/usr/lib/cmake/Qt6/QtPublicGitHelpers.cmake",
+		"/usr/lib/cmake/Qt6/QtPublicJsonHelpers.cmake",
+		"/usr/lib/cmake/Qt6/QtPublicPluginHelpers.cmake",
+		"/usr/lib/cmake/Qt6/QtPublicPluginHelpers_v2.cmake",
+		"/usr/lib/cmake/Qt6/QtPublicSbomAttributionHelpers.cmake",
+		"/usr/lib/cmake/Qt6/QtPublicSbomBuildToolHelpers.cmake",
+		"/usr/lib/cmake/Qt6/QtPublicSbomCommonGenerationHelpers.cmake",
+		"/usr/lib/cmake/Qt6/QtPublicSbomCpeHelpers.cmake",
+		"/usr/lib/cmake/Qt6/QtPublicSbomCycloneDXHelpers.cmake",
+		"/usr/lib/cmake/Qt6/QtPublicSbomDocumentNamespaceHelpers.cmake",
+		"/usr/lib/cmake/Qt6/QtPublicSbomDepHelpers.cmake",
+		"/usr/lib/cmake/Qt6/QtPublicSbomExternalReferenceHelpers.cmake",
+		"/usr/lib/cmake/Qt6/QtPublicSbomFileHelpers.cmake",
+		"/usr/lib/cmake/Qt6/QtPublicSbomGenerationHelpers.cmake",
+		"/usr/lib/cmake/Qt6/QtPublicSbomGenerationCycloneDXHelpers.cmake",
+		"/usr/lib/cmake/Qt6/QtPublicSbomHelpers.cmake",
+		"/usr/lib/cmake/Qt6/QtPublicSbomLicenseHelpers.cmake",
+		"/usr/lib/cmake/Qt6/QtPublicSbomOpsHelpers.cmake",
+		"/usr/lib/cmake/Qt6/QtPublicSbomPurlHelpers.cmake",
+		"/usr/lib/cmake/Qt6/QtPublicSbomPythonHelpers.cmake",
+		"/usr/lib/cmake/Qt6/QtPublicSbomQtEntityHelpers.cmake",
+		"/usr/lib/cmake/Qt6/QtPublicSbomRelationshipHelpers.cmake",
+		"/usr/lib/cmake/Qt6/QtPublicSbomSystemDepHelpers.cmake",
+		"/usr/lib/cmake/Qt6/QtPublicTargetHelpers.cmake",
+		"/usr/lib/cmake/Qt6/QtPublicTestHelpers.cmake",
+		"/usr/lib/cmake/Qt6/QtPublicToolHelpers.cmake",
+		"/usr/lib/cmake/Qt6/QtPublicWalkLibsHelpers.cmake",
+		"/usr/lib/cmake/Qt6/QtPublicWindowsHelpers.cmake",
+		"/usr/share/cmake/Modules/CMakeFindDependencyMacro.cmake",
+		"/usr/lib/cmake/Qt6/Qt6Dependencies.cmake",
+		"/run/media/starlord/Datos/fork-baloo/src/lib/baloosettings.kcfgc"
+	],
+	"CMAKE_SOURCE_DIR" : "/run/media/starlord/Datos/fork-baloo",
+	"CROSS_CONFIG" : false,
+	"DEP_FILE" : "/run/media/starlord/Datos/fork-baloo/src/build/src/lib/KF6Baloo_autogen/deps",
+	"DEP_FILE_RULE_NAME" : "KF6Baloo_autogen/timestamp",
+	"HEADERS" : 
+	[
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/build/src/lib/baloodebug.h",
+			"Mu",
+			"EJRQKI7XPS/moc_baloodebug.cpp",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/build/src/lib/baloosettings.h",
+			"Mu",
+			"EJRQKI7XPS/moc_baloosettings.cpp",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/file/fileexcludefilters.h",
+			"Mu",
+			"YH6BUZA3PE/moc_fileexcludefilters.cpp",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/file/fileindexerconfig.h",
+			"Mu",
+			"YH6BUZA3PE/moc_fileindexerconfig.cpp",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/file/propertydata.h",
+			"Mu",
+			"YH6BUZA3PE/moc_propertydata.cpp",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/file/regexpcache.h",
+			"Mu",
+			"YH6BUZA3PE/moc_regexpcache.cpp",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/file/storagedevices.h",
+			"Mu",
+			"YH6BUZA3PE/moc_storagedevices.cpp",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/lib/advancedqueryparser.h",
+			"Mu",
+			"EWIEGA46WW/moc_advancedqueryparser.cpp",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/lib/file.h",
+			"Mu",
+			"EWIEGA46WW/moc_file.cpp",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/lib/filemonitor.h",
+			"Mu",
+			"EWIEGA46WW/moc_filemonitor.cpp",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/lib/indexerconfig.h",
+			"Mu",
+			"EWIEGA46WW/moc_indexerconfig.cpp",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/lib/query.h",
+			"Mu",
+			"EWIEGA46WW/moc_query.cpp",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/lib/queryrunnable.h",
+			"Mu",
+			"EWIEGA46WW/moc_queryrunnable.cpp",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/lib/resultiterator.h",
+			"Mu",
+			"EWIEGA46WW/moc_resultiterator.cpp",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/lib/searchstore.h",
+			"Mu",
+			"EWIEGA46WW/moc_searchstore.cpp",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/lib/taglistjob.h",
+			"Mu",
+			"EWIEGA46WW/moc_taglistjob.cpp",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/lib/term.h",
+			"Mu",
+			"EWIEGA46WW/moc_term.cpp",
+			null
+		]
+	],
+	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
+	"INCLUDE_DIR" : "/run/media/starlord/Datos/fork-baloo/src/build/src/lib/KF6Baloo_autogen/include",
+	"MOC_COMPILATION_FILE" : "/run/media/starlord/Datos/fork-baloo/src/build/src/lib/KF6Baloo_autogen/mocs_compilation.cpp",
+	"MOC_DEFINITIONS" : 
+	[
+		"BALOO_CORE_DEPRECATED_WARNINGS_SINCE=0x0",
+		"BALOO_CORE_DISABLE_DEPRECATED_BEFORE_AND_AT=0x0",
+		"KCOREADDONS_LIB",
+		"KF6Baloo_EXPORTS",
+		"KF_DEPRECATED_WARNINGS_SINCE=0x70000",
+		"KF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x61b00",
+		"QT_CORE_LIB",
+		"QT_DBUS_LIB",
+		"QT_DEPRECATED_WARNINGS_SINCE=0x70000",
+		"QT_DISABLE_DEPRECATED_BEFORE=0x60b00",
+		"QT_NO_CAST_FROM_ASCII",
+		"QT_NO_CAST_FROM_BYTEARRAY",
+		"QT_NO_CAST_TO_ASCII",
+		"QT_NO_DEBUG",
+		"QT_NO_FOREACH",
+		"QT_NO_KEYWORDS",
+		"QT_NO_NARROWING_CONVERSIONS_IN_CONNECT",
+		"QT_NO_URL_CAST_FROM_STRING",
+		"QT_STRICT_ITERATORS",
+		"QT_USE_QSTRINGBUILDER",
+		"_GNU_SOURCE",
+		"_LARGEFILE64_SOURCE"
+	],
+	"MOC_DEPEND_FILTERS" : 
+	[
+		[
+			"Q_PLUGIN_METADATA",
+			"[\n][ \t]*Q_PLUGIN_METADATA[ \t]*\\([^\\)]*FILE[ \t]*\"([^\"]+)\""
+		]
+	],
+	"MOC_INCLUDES" : 
+	[
+		"/run/media/starlord/Datos/fork-baloo/src/build/src/lib",
+		"/run/media/starlord/Datos/fork-baloo/src/lib",
+		"/run/media/starlord/Datos/fork-baloo/src/build",
+		"/run/media/starlord/Datos/fork-baloo",
+		"/run/media/starlord/Datos/fork-baloo/src/build/src/codecs",
+		"/run/media/starlord/Datos/fork-baloo/src/codecs",
+		"/run/media/starlord/Datos/fork-baloo/src/build/src/engine",
+		"/run/media/starlord/Datos/fork-baloo/src/engine",
+		"/run/media/starlord/Datos/fork-baloo/src/build/src/file",
+		"/run/media/starlord/Datos/fork-baloo/src/file",
+		"/run/media/starlord/Datos/fork-baloo/src/build/src/dbus",
+		"/run/media/starlord/Datos/fork-baloo/src/dbus",
+		"/usr/include/qt6/QtCore",
+		"/usr/include/qt6",
+		"/usr/lib/qt6/mkspecs/linux-g++",
+		"/usr/include/KF6/KCoreAddons",
+		"/usr/include/KF6/KFileMetaData",
+		"/usr/include/KF6/KConfig",
+		"/usr/include/KF6/KConfigCore",
+		"/usr/include/qt6/QtDBus",
+		"/usr/include/KF6/Solid",
+		"/usr/include",
+		"/usr/include/c++/16",
+		"/usr/include/c++/16/x86_64-pc-linux-gnu",
+		"/usr/include/c++/16/backward",
+		"/usr/lib/gcc/x86_64-pc-linux-gnu/16/include",
+		"/usr/local/include"
+	],
+	"MOC_MACRO_NAMES" : 
+	[
+		"Q_OBJECT",
+		"Q_GADGET",
+		"Q_NAMESPACE",
+		"Q_NAMESPACE_EXPORT",
+		"Q_GADGET_EXPORT",
+		"Q_ENUM_NS",
+		"K_PLUGIN_FACTORY",
+		"K_PLUGIN_CLASS",
+		"K_PLUGIN_FACTORY_WITH_JSON",
+		"K_PLUGIN_CLASS_WITH_JSON"
+	],
+	"MOC_OPTIONS" : [],
+	"MOC_PATH_PREFIX" : false,
+	"MOC_PREDEFS_CMD" : 
+	[
+		"/usr/bin/c++",
+		"-std=c++20",
+		"-w",
+		"-dM",
+		"-E",
+		"/usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp"
+	],
+	"MOC_PREDEFS_FILE" : "/run/media/starlord/Datos/fork-baloo/src/build/src/lib/KF6Baloo_autogen/moc_predefs.h",
+	"MOC_RELAXED_MODE" : false,
+	"MOC_SKIP" : [],
+	"MULTI_CONFIG" : false,
+	"PARALLEL" : 4,
+	"PARSE_CACHE_FILE" : "/run/media/starlord/Datos/fork-baloo/src/build/src/lib/CMakeFiles/KF6Baloo_autogen.dir/ParseCache.txt",
+	"QT_MOC_EXECUTABLE" : "/usr/lib/qt6/moc",
+	"QT_UIC_EXECUTABLE" : "",
+	"QT_VERSION_MAJOR" : 6,
+	"QT_VERSION_MINOR" : 11,
+	"SETTINGS_FILE" : "/run/media/starlord/Datos/fork-baloo/src/build/src/lib/CMakeFiles/KF6Baloo_autogen.dir/AutogenUsed.txt",
+	"SOURCES" : 
+	[
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/build/src/lib/baloodebug.cpp",
+			"Mu",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/build/src/lib/baloosettings.cpp",
+			"Mu",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/file/fileexcludefilters.cpp",
+			"Mu",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/file/fileindexerconfig.cpp",
+			"Mu",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/file/propertydata.cpp",
+			"Mu",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/file/regexpcache.cpp",
+			"Mu",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/file/storagedevices.cpp",
+			"Mu",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/lib/advancedqueryparser.cpp",
+			"Mu",
+			null
+		],
+		[ "/run/media/starlord/Datos/fork-baloo/src/lib/file.cpp", "Mu", null ],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/lib/filemonitor.cpp",
+			"Mu",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/lib/indexerconfig.cpp",
+			"Mu",
+			null
+		],
+		[ "/run/media/starlord/Datos/fork-baloo/src/lib/query.cpp", "Mu", null ],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/lib/queryrunnable.cpp",
+			"Mu",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/lib/resultiterator.cpp",
+			"Mu",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/lib/searchstore.cpp",
+			"Mu",
+			null
+		],
+		[
+			"/run/media/starlord/Datos/fork-baloo/src/lib/taglistjob.cpp",
+			"Mu",
+			null
+		],
+		[ "/run/media/starlord/Datos/fork-baloo/src/lib/term.cpp", "Mu", null ]
+	],
+	"USE_BETTER_GRAPH" : true,
+	"VERBOSITY" : 0
+}

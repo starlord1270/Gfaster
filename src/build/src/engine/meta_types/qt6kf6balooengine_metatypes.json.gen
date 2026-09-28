@@ -1,0 +1,36 @@
+[
+    {
+        "classes": [
+            {
+                "className": "Baloo",
+                "enums": [
+                    {
+                        "isClass": false,
+                        "isFlag": false,
+                        "lineNumber": 19,
+                        "name": "IndexerState",
+                        "values": [
+                            "Idle",
+                            "Suspended",
+                            "FirstRun",
+                            "NewFiles",
+                            "ModifiedFiles",
+                            "XAttrFiles",
+                            "ContentIndexing",
+                            "UnindexedFileCheck",
+                            "StaleIndexEntriesClean",
+                            "LowPowerIdle",
+                            "Unavailable",
+                            "Startup"
+                        ]
+                    }
+                ],
+                "lineNumber": 16,
+                "namespace": true,
+                "qualifiedClassName": "Baloo"
+            }
+        ],
+        "inputFile": "indexerstate.h",
+        "outputRevision": 69
+    }
+]

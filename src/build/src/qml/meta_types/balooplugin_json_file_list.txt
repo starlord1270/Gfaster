@@ -1,0 +1,2 @@
+/run/media/starlord/Datos/fork-baloo/src/build/src/qml/balooplugin_autogen/include/balooplugin_org_kde_balooPlugin.moc.json
+/run/media/starlord/Datos/fork-baloo/src/build/src/qml/balooplugin_autogen/include/moc_queryresultsmodel.cpp.json

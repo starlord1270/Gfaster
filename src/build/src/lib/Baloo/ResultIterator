@@ -1,0 +1,1 @@
+#include "baloo/resultiterator.h" // IWYU pragma: export

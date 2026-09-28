@@ -1,0 +1,26 @@
+{
+	"InstallScripts" : 
+	[
+		"/run/media/starlord/Datos/fork-baloo/src/build/cmake_install.cmake",
+		"/run/media/starlord/Datos/fork-baloo/src/build/src/cmake_install.cmake",
+		"/run/media/starlord/Datos/fork-baloo/src/build/src/lib/cmake_install.cmake",
+		"/run/media/starlord/Datos/fork-baloo/src/build/src/engine/cmake_install.cmake",
+		"/run/media/starlord/Datos/fork-baloo/src/build/src/codecs/cmake_install.cmake",
+		"/run/media/starlord/Datos/fork-baloo/src/build/src/qml/cmake_install.cmake",
+		"/run/media/starlord/Datos/fork-baloo/src/build/src/qml/experimental/cmake_install.cmake",
+		"/run/media/starlord/Datos/fork-baloo/src/build/src/file/cmake_install.cmake",
+		"/run/media/starlord/Datos/fork-baloo/src/build/src/file/extractor/cmake_install.cmake",
+		"/run/media/starlord/Datos/fork-baloo/src/build/src/kioworkers/cmake_install.cmake",
+		"/run/media/starlord/Datos/fork-baloo/src/build/src/kioworkers/timeline/cmake_install.cmake",
+		"/run/media/starlord/Datos/fork-baloo/src/build/src/kioworkers/tags/cmake_install.cmake",
+		"/run/media/starlord/Datos/fork-baloo/src/build/src/kioworkers/search/cmake_install.cmake",
+		"/run/media/starlord/Datos/fork-baloo/src/build/src/kioworkers/kded/cmake_install.cmake",
+		"/run/media/starlord/Datos/fork-baloo/src/build/src/tools/cmake_install.cmake",
+		"/run/media/starlord/Datos/fork-baloo/src/build/src/tools/baloosearch/cmake_install.cmake",
+		"/run/media/starlord/Datos/fork-baloo/src/build/src/tools/balooshow/cmake_install.cmake",
+		"/run/media/starlord/Datos/fork-baloo/src/build/src/tools/balooctl/cmake_install.cmake",
+		"/run/media/starlord/Datos/fork-baloo/src/build/src/dbus/cmake_install.cmake",
+		"/run/media/starlord/Datos/fork-baloo/src/build/src/dbus/fake/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

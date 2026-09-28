@@ -1,0 +1,2 @@
+org.kde.baloo(balooplugin)
+org.kde.baloo.experimental(baloomonitorplugin)

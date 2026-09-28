@@ -1,0 +1,154 @@
+[
+    {
+        "classes": [
+            {
+                "className": "org_kde_balooPlugin",
+                "lineNumber": 11,
+                "object": true,
+                "qualifiedClassName": "org_kde_balooPlugin",
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QQmlEngineExtensionPlugin"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "balooplugin_org_kde_balooPlugin.cpp",
+        "outputRevision": 69
+    },
+    {
+        "classes": [
+            {
+                "classInfos": [
+                    {
+                        "name": "QML.Element",
+                        "value": "auto"
+                    }
+                ],
+                "className": "Query",
+                "lineNumber": 14,
+                "object": true,
+                "properties": [
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 0,
+                        "lineNumber": 18,
+                        "name": "searchString",
+                        "notify": "searchStringChanged",
+                        "override": false,
+                        "read": "searchString",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QString",
+                        "user": false,
+                        "virtual": false,
+                        "write": "setSearchString"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 1,
+                        "lineNumber": 19,
+                        "name": "limit",
+                        "notify": "limitChanged",
+                        "override": false,
+                        "read": "limit",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "int",
+                        "user": false,
+                        "virtual": false,
+                        "write": "setLimit"
+                    }
+                ],
+                "qualifiedClassName": "Query",
+                "signals": [
+                    {
+                        "access": "public",
+                        "index": 0,
+                        "lineNumber": 32,
+                        "name": "searchStringChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "index": 1,
+                        "lineNumber": 33,
+                        "name": "limitChanged",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QObject"
+                    }
+                ]
+            },
+            {
+                "classInfos": [
+                    {
+                        "name": "QML.Element",
+                        "value": "auto"
+                    }
+                ],
+                "className": "QueryResultsModel",
+                "lineNumber": 41,
+                "object": true,
+                "properties": [
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 0,
+                        "lineNumber": 45,
+                        "name": "query",
+                        "notify": "queryChanged",
+                        "override": false,
+                        "read": "query",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "Query*",
+                        "user": false,
+                        "virtual": false,
+                        "write": "setQuery"
+                    }
+                ],
+                "qualifiedClassName": "QueryResultsModel",
+                "signals": [
+                    {
+                        "access": "public",
+                        "index": 0,
+                        "lineNumber": 64,
+                        "name": "queryChanged",
+                        "returnType": "void"
+                    }
+                ],
+                "slots": [
+                    {
+                        "access": "private",
+                        "index": 1,
+                        "lineNumber": 67,
+                        "name": "populateModel",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QAbstractListModel"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "queryresultsmodel.h",
+        "outputRevision": 69
+    }
+]

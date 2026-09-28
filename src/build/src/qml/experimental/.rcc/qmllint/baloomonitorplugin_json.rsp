@@ -1,0 +1,15 @@
+--bare
+-I
+/usr/lib/qt6/qml
+-I
+/run/media/starlord/Datos/fork-baloo/src/build/bin
+-I
+/run/media/starlord/Datos/fork-baloo/src/build/bin/org/kde/baloo/experimental
+-I
+/run/media/starlord/Datos/fork-baloo/src/build/bin
+-I
+/usr/lib/qt6/qml
+--resource
+/run/media/starlord/Datos/fork-baloo/src/build/src/qml/experimental/.qt/rcc/qmake_org_kde_baloo_experimental.qrc
+--json
+/run/media/starlord/Datos/fork-baloo/src/build/baloomonitorplugin_qmllint.json

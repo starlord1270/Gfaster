@@ -1,0 +1,14 @@
+/run/media/starlord/Datos/fork-baloo/baloo-rust/target/release/deps/serde-785e679b921bee15.d: /home/starlord/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/lib.rs /home/starlord/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/integer128.rs /home/starlord/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/mod.rs /home/starlord/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/de.rs /home/starlord/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/ser.rs /run/media/starlord/Datos/fork-baloo/baloo-rust/target/release/build/serde-cab8da92f9ec4fd5/out/private.rs
+
+/run/media/starlord/Datos/fork-baloo/baloo-rust/target/release/deps/libserde-785e679b921bee15.rlib: /home/starlord/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/lib.rs /home/starlord/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/integer128.rs /home/starlord/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/mod.rs /home/starlord/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/de.rs /home/starlord/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/ser.rs /run/media/starlord/Datos/fork-baloo/baloo-rust/target/release/build/serde-cab8da92f9ec4fd5/out/private.rs
+
+/run/media/starlord/Datos/fork-baloo/baloo-rust/target/release/deps/libserde-785e679b921bee15.rmeta: /home/starlord/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/lib.rs /home/starlord/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/integer128.rs /home/starlord/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/mod.rs /home/starlord/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/de.rs /home/starlord/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/ser.rs /run/media/starlord/Datos/fork-baloo/baloo-rust/target/release/build/serde-cab8da92f9ec4fd5/out/private.rs
+
+/home/starlord/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/lib.rs:
+/home/starlord/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/integer128.rs:
+/home/starlord/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/mod.rs:
+/home/starlord/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/de.rs:
+/home/starlord/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/ser.rs:
+/run/media/starlord/Datos/fork-baloo/baloo-rust/target/release/build/serde-cab8da92f9ec4fd5/out/private.rs:
+
+# env-dep:OUT_DIR=/run/media/starlord/Datos/fork-baloo/baloo-rust/target/release/build/serde-cab8da92f9ec4fd5/out

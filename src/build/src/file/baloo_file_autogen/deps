@@ -1,0 +1,9 @@
+baloo_file_autogen/timestamp: \
+	/run/media/starlord/Datos/fork-baloo/src/file/CMakeLists.txt \
+	/run/media/starlord/Datos/fork-baloo/src/file/baloo_file.desktop.in \
+	/run/media/starlord/Datos/fork-baloo/src/file/kde-baloo.service.in \
+	/run/media/starlord/Datos/fork-baloo/src/file/main.cpp \
+	/run/media/starlord/Datos/fork-baloo/src/lib/baloosettings.kcfgc \
+	/usr/share/ECM/modules/ECMQtDeclareLoggingCategory.cpp.in \
+	/usr/share/ECM/modules/ECMQtDeclareLoggingCategory.h.in \
+	/usr/bin/cmake

@@ -1,0 +1,18 @@
+{
+    "classes": [
+        {
+            "className": "org_kde_balooPlugin",
+            "lineNumber": 11,
+            "object": true,
+            "qualifiedClassName": "org_kde_balooPlugin",
+            "superClasses": [
+                {
+                    "access": "public",
+                    "name": "QQmlEngineExtensionPlugin"
+                }
+            ]
+        }
+    ],
+    "inputFile": "balooplugin_org_kde_balooPlugin.cpp",
+    "outputRevision": 69
+}

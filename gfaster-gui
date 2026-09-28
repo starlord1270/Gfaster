@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# GFaster Native Desktop App Launcher
+APP_PATH="/usr/share/gfaster/baloo-explorer/index.html"
+
+# If local path exists in dev environment, prefer it
+if [ -f "/run/media/starlord/Datos/fork-baloo/baloo-explorer/index.html" ]; then
+    APP_PATH="/run/media/starlord/Datos/fork-baloo/baloo-explorer/index.html"
+fi
+
+URL="file://${APP_PATH}"
+
+if command -v google-chrome &> /dev/null; then
+    exec google-chrome --app="${URL}" --name="GFaster File Manager" --class="GFaster" "$@"
+elif command -v zen-browser &> /dev/null; then
+    exec zen-browser --new-window "${URL}" "$@"
+elif command -v chromium &> /dev/null; then
+    exec chromium --app="${URL}" --name="GFaster File Manager" "$@"
+else
+    exec xdg-open "${URL}"
+fi

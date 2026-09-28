@@ -1,0 +1,4 @@
+baloosearch6_autogen/timestamp: \
+	/run/media/starlord/Datos/fork-baloo/src/tools/baloosearch/CMakeLists.txt \
+	/run/media/starlord/Datos/fork-baloo/src/tools/baloosearch/main.cpp \
+	/usr/bin/cmake

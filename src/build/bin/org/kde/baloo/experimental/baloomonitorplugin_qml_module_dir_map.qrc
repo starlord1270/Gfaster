@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/">
+    <file alias="/qt/qml/org/kde/baloo/experimental">/run/media/starlord/Datos/fork-baloo/src/build/bin/org/kde/baloo/experimental</file>
+
+  </qresource>
+</RCC>

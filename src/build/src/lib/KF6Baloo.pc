@@ -1,0 +1,13 @@
+
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${prefix}/lib
+includedir=${prefix}/include/KF6/Baloo
+
+Name: KF6Baloo
+Description: Baloo is a file indexing and searching framework for Linux
+URL: https://www.kde.org/
+Version: 6.30.0
+Libs: -L${prefix}/lib -lKF6Baloo
+Cflags: -I${prefix}/include/KF6/Baloo 
+Requires: Qt6Core

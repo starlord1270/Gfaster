@@ -1,0 +1,17 @@
+[Desktop Entry]
+Name=GFaster File Manager
+GenericName=Gestor de Archivos
+Comment=Gestor de archivos ultrarrápido con motor en Rust y tema oscuro
+Exec=gfaster-gui %U
+Icon=system-file-manager
+Terminal=false
+Type=Application
+Categories=System;FileTools;FileManager;Qt;KDE;Utility;
+MimeType=inode/directory;
+Keywords=folder;manager;explore;files;gfaster;baloo;
+StartupNotify=true
+Actions=new-window;
+
+[Desktop Action new-window]
+Name=Nueva ventana de GFaster
+Exec=gfaster-gui %U

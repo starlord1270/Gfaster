@@ -1,0 +1,4 @@
+balooshow6_autogen/timestamp: \
+	/run/media/starlord/Datos/fork-baloo/src/tools/balooshow/CMakeLists.txt \
+	/run/media/starlord/Datos/fork-baloo/src/tools/balooshow/main.cpp \
+	/usr/bin/cmake

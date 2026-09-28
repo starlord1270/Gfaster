@@ -1,0 +1,2 @@
+/run/media/starlord/Datos/fork-baloo/src/build/src/qml/experimental/baloomonitorplugin_autogen/include/baloomonitorplugin_org_kde_baloo_experimentalPlugin.moc.json
+/run/media/starlord/Datos/fork-baloo/src/build/src/qml/experimental/baloomonitorplugin_autogen/include/moc_monitor.cpp.json

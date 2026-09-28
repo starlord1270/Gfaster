@@ -1,0 +1,20 @@
+[Unit]
+Description=Baloo File Indexer Daemon
+PartOf=graphical-session.target
+
+[Service]
+ExecStart=/usr/lib/kf6/baloo_file
+BusName=org.kde.baloo
+Slice=background.slice
+ExecCondition=/usr/bin/kde-systemd-start-condition --condition "baloofilerc:Basic Settings:Indexing-Enabled:true"
+# We'll basically only want to consume resources if they aren't needed anywhere else, hence weights are way low.
+CPUWeight=1
+IOWeight=1
+# Used memory includes any generated data, notably any transient allocation done
+# by the extractors. A too low limit will cause significant slowdown, causing the
+# extractor to hold onto the memory instead of releasing it in a timely manner
+# after a transaction has finished.
+MemoryHigh=25%
+
+[Install]
+WantedBy=graphical-session.target

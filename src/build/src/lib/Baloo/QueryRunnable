@@ -1,0 +1,1 @@
+#include "baloo/queryrunnable.h" // IWYU pragma: export
