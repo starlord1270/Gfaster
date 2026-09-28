@@ -58,6 +58,7 @@ public:
     Q_INVOKABLE QString getFreeSpaceForPath(const QString &path);
     Q_INVOKABLE QVariantList getOpenWithApps(const QString &path);
     Q_INVOKABLE void launchWithApp(const QString &path, const QString &execCmd);
+    Q_INVOKABLE void openWithSystemDialog(const QString &path);
     Q_INVOKABLE void searchFiles(const QString &query);
     Q_INVOKABLE void compactDatabase();
 

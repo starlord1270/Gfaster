@@ -1,4 +1,5 @@
 #include "filesystemmodel.h"
+#include <KOpenWithDialog>
 #include <QDebug>
 #include <QMimeDatabase>
 #include <QMimeType>
@@ -159,6 +160,18 @@ void FileSystemModel::launchWithApp(const QString &path, const QString &execCmd)
     } else {
         QProcess::startDetached(cleanCmd, QStringList() << path);
     }
+}
+
+void FileSystemModel::openWithSystemDialog(const QString &path)
+{
+    qDebug() << "[GFaster] Launching native KDE open-with dialog for:" << path;
+    if (path.isEmpty())
+        return;
+
+    QUrl url = QUrl::fromLocalFile(path);
+    KOpenWithDialog *dialog = new KOpenWithDialog(QList<QUrl>{url}, QString(), QString(), nullptr);
+    dialog->setAttribute(Qt::WA_DeleteOnClose);
+    dialog->show();
 }
 
 FileSystemModel::FileSystemModel(QObject *parent)

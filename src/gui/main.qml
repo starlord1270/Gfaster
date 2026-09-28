@@ -435,22 +435,27 @@ ApplicationWindow {
                                     title: "🚀 Abrir con..."
                                     visible: !isDir
 
+                                    MenuItem {
+                                        text: "⚙️ Abrir con el sistema (KDE)..."
+                                        onTriggered: fsModel.openWithSystemDialog(path)
+                                    }
+
+                                    MenuItem {
+                                        text: "🔍 Buscador rápido de aplicaciones..."
+                                        onTriggered: appSelectorDialog.openForFile(path, name)
+                                    }
+
+                                    MenuSeparator {}
+
                                     Instantiator {
                                         model: fsModel.getOpenWithApps(path)
-                                        onObjectAdded: (index, object) => openWithMenu.insertItem(index, object)
+                                        onObjectAdded: (index, object) => openWithMenu.insertItem(index + 3, object)
                                         onObjectRemoved: (index, object) => openWithMenu.removeItem(object)
                                         delegate: MenuItem {
                                             required property var modelData
                                             text: (modelData.isRecommended ? "⭐ " : "📱 ") + modelData.name
                                             onTriggered: fsModel.launchWithApp(path, modelData.cmd)
                                         }
-                                    }
-
-                                    MenuSeparator {}
-
-                                    MenuItem {
-                                        text: "🔍 Buscar todas las aplicaciones del sistema..."
-                                        onTriggered: appSelectorDialog.openForFile(path, name)
                                     }
                                 }
 
