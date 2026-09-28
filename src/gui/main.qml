@@ -38,7 +38,7 @@ ApplicationWindow {
             // Sidebar Panel
             Rectangle {
                 Layout.fillHeight: true
-                Layout.preferredWidth: 250
+                Layout.preferredWidth: 260
                 color: bgSurface
                 radius: 16
                 border.color: borderGlow
@@ -106,11 +106,11 @@ ApplicationWindow {
                                     Layout.bottomMargin: 4
                                 }
 
-                                SidebarItem { text: "💻 Equipo"; path: "/" }
-                                SidebarItem { text: "🏠 starlord"; path: "/home/starlord" }
-                                SidebarItem { text: "🖥️ Desktop"; path: "/home/starlord/Desktop" }
-                                SidebarItem { text: "🕒 Recientes"; path: "/home/starlord/Downloads" }
-                                SidebarItem { text: "🗑️ Papelera"; path: "/home/starlord/.local/share/Trash/files" }
+                                SidebarItem { itemText: "💻 Equipo"; path: "/" }
+                                SidebarItem { itemText: "🏠 starlord"; path: "/home/starlord" }
+                                SidebarItem { itemText: "🖥️ Desktop"; path: "/home/starlord/Desktop" }
+                                SidebarItem { itemText: "🕒 Recientes"; path: "/home/starlord/Downloads" }
+                                SidebarItem { itemText: "🗑️ Papelera"; path: "/home/starlord/.local/share/Trash/files" }
                             }
 
                             // SECTION 2: Dispositivos
@@ -127,10 +127,10 @@ ApplicationWindow {
                                     Layout.bottomMargin: 4
                                 }
 
-                                SidebarItem { text: "💽 Sistema de archivos"; path: "/" }
-                                SidebarItem { text: "💽 Datos"; path: "/run/media/starlord/Datos" }
-                                SidebarItem { text: "📱 Infinix X682B"; path: "/home/starlord/infinix_mnt" }
-                                SidebarItem { text: "💽 universidad"; path: "/home/starlord/Universidad" }
+                                SidebarItem { itemText: "💽 Sistema de archivos"; path: "/" }
+                                SidebarItem { itemText: "💽 Datos"; path: "/run/media/starlord/Datos" }
+                                SidebarItem { itemText: "📱 Infinix X682B"; path: "/home/starlord/infinix_mnt" }
+                                SidebarItem { itemText: "💽 universidad"; path: "/home/starlord/Universidad" }
                             }
 
                             // SECTION 3: Red
@@ -147,7 +147,7 @@ ApplicationWindow {
                                     Layout.bottomMargin: 4
                                 }
 
-                                SidebarItem { text: "🌐 Navegar por la red"; path: "/" }
+                                SidebarItem { itemText: "🌐 Navegar por la red"; path: "/" }
                             }
                         }
                     }
@@ -304,7 +304,7 @@ ApplicationWindow {
 
                         ColumnLayout {
                             anchors.centerIn: parent
-                            spacing: 8
+                            spacing: 6
                             width: parent.width - 20
 
                             Text {
@@ -337,13 +337,11 @@ ApplicationWindow {
                             hoverEnabled: true
                             acceptedButtons: Qt.LeftButton | Qt.RightButton
 
-                            onDoubleClicked: {
-                                if (mouse.button === Qt.LeftButton) {
-                                    fsModel.openItem(path, isDir)
-                                }
+                            onDoubleClicked: (mouse) => {
+                                fsModel.openItem(path, isDir)
                             }
 
-                            onClicked: {
+                            onClicked: (mouse) => {
                                 if (mouse.button === Qt.RightButton) {
                                     itemContextMenu.popup()
                                 }
@@ -375,24 +373,44 @@ ApplicationWindow {
     // Helper component for sidebar links
     component SidebarItem : Button {
         property string path: ""
+        property string itemText: ""
+        property string spaceText: fsModel.getFreeSpaceForPath(path)
+
         Layout.fillWidth: true
-        height: 36
-        contentItem: Text {
-            text: parent.text
-            color: parent.hovered ? textMain : textMuted
-            font.pixelSize: 13
-            font.weight: parent.hovered ? Font.Medium : Font.Normal
-            verticalAlignment: Text.AlignVCenter
-            leftPadding: 12
+        height: spaceText !== "" ? 44 : 34
+
+        contentItem: ColumnLayout {
+            spacing: 1
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.left: parent.left
+            anchors.leftMargin: 10
+
+            Text {
+                text: itemText
+                color: parent.parent.hovered ? textMain : textMuted
+                font.pixelSize: 13
+                font.weight: parent.parent.hovered ? Font.Medium : Font.Normal
+            }
+
+            Text {
+                text: spaceText
+                color: wineRedNeon
+                font.pixelSize: 10
+                font.weight: Font.DemiBold
+                visible: spaceText !== ""
+            }
         }
+
         background: Rectangle {
             color: parent.hovered ? (fsModel.currentPath === path ? wineRed : bgCardHover) : (fsModel.currentPath === path ? bgCard : "transparent")
             radius: 8
         }
+
         onClicked: {
             if (path !== "") fsModel.openDir(path)
         }
     }
 }
+
 
 
