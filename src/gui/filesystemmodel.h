@@ -49,7 +49,7 @@ public:
     Q_INVOKABLE void searchFiles(const QString &query);
     Q_INVOKABLE void compactDatabase();
 
-signals:
+Q_SIGNALS:
     void currentPathChanged();
     void itemCountChanged();
     void freeSpaceStrChanged();

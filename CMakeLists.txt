@@ -61,7 +61,7 @@ add_feature_info(INDEXER_SERVICE ${BUILD_INDEXER_SERVICE}
     "Build and install the session wide indexer service. The service is started with the session and running in the background.")
 
 # set up build dependencies
-find_package(Qt6 ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE COMPONENTS Core DBus Widgets Qml Quick Test)
+find_package(Qt6 ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE COMPONENTS Core DBus Widgets Qml Quick QuickControls2 Test)
 
 find_package(KF6 ${KF_DEP_VERSION} REQUIRED COMPONENTS CoreAddons Config DBusAddons I18n IdleTime Solid FileMetaData Crash KIO)
 
