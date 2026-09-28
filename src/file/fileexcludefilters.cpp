@@ -77,6 +77,12 @@ const char* const s_defaultFileExcludeFilters[] = {
     "*.sql.gz",  // Compressed SQL database dumps
     "*.ytdl",    // youtube-dl temp files
     "*.tfstate*", // Terraform state files
+    "package-lock.json",
+    "pnpm-lock.yaml",
+    "yarn.lock",
+    "Cargo.lock",
+    "composer.lock",
+    "poetry.lock",
 
     // Bytecode files
     "*.class", // Java
@@ -99,7 +105,7 @@ const char* const s_defaultFileExcludeFilters[] = {
     nullptr
 };
 
-const int s_defaultFileExcludeFiltersVersion = 9;
+const int s_defaultFileExcludeFiltersVersion = 10;
 
 const char *const s_defaultFolderExcludeFilters[] = {"po",
 
@@ -129,6 +135,21 @@ const char *const s_defaultFolderExcludeFilters[] = {"po",
                                                      ".terraform",
                                                      ".venv",
                                                      "venv",
+                                                     "target",
+                                                     "dist",
+                                                     "out",
+                                                     ".next",
+                                                     ".nuxt",
+                                                     ".svelte-kit",
+                                                     ".astro",
+                                                     ".cache",
+                                                     ".pytest_cache",
+                                                     ".mypy_cache",
+                                                     ".ruff_cache",
+                                                     ".cargo",
+                                                     ".gradle",
+                                                     ".m2",
+                                                     "vendor",
 
                                                      // misc
                                                      "core-dumps",
@@ -138,7 +159,7 @@ const char *const s_defaultFolderExcludeFilters[] = {"po",
                                                      // end of list
                                                      nullptr};
 
-const int s_defaultFolderExcludeFiltersVersion = 5;
+const int s_defaultFolderExcludeFiltersVersion = 6;
 
 const char *const s_sourceCodeMimeTypes[] = {
     "text/css",

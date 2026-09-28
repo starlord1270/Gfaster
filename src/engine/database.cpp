@@ -242,3 +242,39 @@ Database::OpenResult Database::open(OpenMode mode)
     m_mode = (mode == ReadOnlyDatabase) ? ReadOnlyDatabase : ReadWriteDatabase;
     return OpenResult::Success;
 }
+
+bool Database::compact()
+{
+    QMutexLocker locker(&m_mutex);
+    if (!m_env) {
+        return false;
+    }
+
+    QDir dir(m_path);
+    QString tempPath = dir.filePath(QStringLiteral("index-compact"));
+    QByteArray tempPathBa = QFile::encodeName(tempPath);
+    QFile::remove(tempPath);
+
+    int rc = mdb_env_copy2(m_env, tempPathBa.constData(), MDB_CP_COMPACT);
+    if (rc != 0) {
+        qCWarning(ENGINE) << "Failed to compact LMDB database:" << mdb_strerror(rc);
+        QFile::remove(tempPath);
+        return false;
+    }
+
+    QString indexPath = dir.filePath(QStringLiteral("index"));
+    QString backupPath = dir.filePath(QStringLiteral("index-old"));
+    QFile::remove(backupPath);
+
+    if (QFile::rename(indexPath, backupPath)) {
+        if (QFile::rename(tempPath, indexPath)) {
+            QFile::remove(backupPath);
+            qCInfo(ENGINE) << "Database compaction completed successfully.";
+            return true;
+        } else {
+            QFile::rename(backupPath, indexPath);
+        }
+    }
+    QFile::remove(tempPath);
+    return false;
+}

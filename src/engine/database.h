@@ -70,6 +70,12 @@ public:
      */
     OpenResult open(OpenMode mode);
 
+    /**
+     * Compact the LMDB database using MDB_CP_COMPACT to reduce size on disk.
+     * @return true on success, false otherwise.
+     */
+    bool compact();
+
 private:
     /**
      * serialize access, as open might be called from multiple threads

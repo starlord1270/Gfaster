@@ -71,6 +71,7 @@ int main(int argc, char* argv[])
     parser.addPositionalArgument(QStringLiteral("config"), i18n("Modify the Baloo configuration"));
     parser.addPositionalArgument(QStringLiteral("monitor"), i18n("Monitor the file indexer"));
     parser.addPositionalArgument(QStringLiteral("indexSize"), i18n("Display the disk space used by index"));
+    parser.addPositionalArgument(QStringLiteral("compact"), i18n("Compact the index database to optimize disk space"));
     parser.addPositionalArgument(QStringLiteral("failed"), i18n("Display files which could not be indexed"));
 
     QString statusFormatDescription = i18nc("Format to use for status command, %1|%2|%3 are option values, %4 is a CLI command",
@@ -277,6 +278,41 @@ int main(int argc, char* argv[])
         prFunc(QStringLiteral("FailedIdsDB"), size.failedIds);
         prFunc(QStringLiteral("MTimeDB"), size.mtimeDb);
 
+        return 0;
+    }
+
+    if (command == QLatin1String("compact")) {
+        bool running = mainInterface.isValid();
+        if (running) {
+            out << "Stopping the File Indexer before compacting...\n";
+            mainInterface.quit();
+            for (int i = 5 * 60; i; --i) {
+                QCoreApplication::processEvents();
+                if (!mainInterface.isValid()) {
+                    break;
+                }
+                QThread::msleep(100);
+            }
+        }
+
+        out << "Compacting Baloo database...\n";
+        Database *db = globalDatabaseInstance();
+        if (db->open(Database::ReadWriteDatabase) != Database::OpenResult::Success) {
+            out << "Baloo Index could not be opened for compacting.\n";
+            return 1;
+        }
+
+        if (db->compact()) {
+            out << "Baloo database compacted successfully!\n";
+        } else {
+            out << "Failed to compact Baloo database.\n";
+            return 1;
+        }
+
+        if (running) {
+            out << "Restarting File Indexer...\n";
+            start();
+        }
         return 0;
     }
 

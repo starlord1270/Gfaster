@@ -14,6 +14,7 @@
 #include <QEventLoop>
 #include <QElapsedTimer>
 #include <QDBusConnection>
+#include <QThread>
 
 using namespace Baloo;
 
@@ -143,6 +144,9 @@ void FileContentIndexer::run()
             QMetaObject::invokeMethod(this,
                 [this, elapsed, batchSize] { committedBatch(elapsed, batchSize); },
                 Qt::QueuedConnection);
+
+            // Throttle slightly between batches to yield CPU and disk I/O
+            QThread::msleep(25);
         }
     }
     QMetaObject::invokeMethod(this, &FileContentIndexer::done, Qt::QueuedConnection);

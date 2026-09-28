@@ -44,3 +44,10 @@ CMakeLists.txt.user*
 .idea
 /cmake-build*
 .cache
+/target/
+/build/
+*.pkg.tar.zst
+*.src.tar.gz
+pkg/
+src/gfaster*
+

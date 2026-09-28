@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Baloo Rust Explorer - Gestor de Archivos Moderno</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <div class="app-window">
+    <!-- Header Titlebar -->
+    <header class="titlebar">
+      <div class="window-controls">
+        <div class="dot close"></div>
+        <div class="dot min"></div>
+        <div class="dot max"></div>
+      </div>
+
+      <div class="search-container">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input type="text" id="searchInput" class="search-input" placeholder="Buscar archivos o contenido con Baloo Rust...">
+      </div>
+
+      <div class="indexer-badge">
+        <div class="badge-pulse"></div>
+        <span>Baloo Rust: Activo (Indexado 0.2ms)</span>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+      <!-- Sidebar Navigation -->
+      <aside class="sidebar">
+        <div class="nav-section">
+          <div class="nav-title">Acceso Rápido</div>
+          <div class="nav-item active" data-filter="all">
+            <i class="fa-solid fa-house icon"></i>
+            <span>Inicio (/home)</span>
+          </div>
+          <div class="nav-item" data-filter="code">
+            <i class="fa-solid fa-code icon"></i>
+            <span>Código & Proyectos</span>
+          </div>
+          <div class="nav-item" data-filter="documents">
+            <i class="fa-solid fa-file-lines icon"></i>
+            <span>Documentos</span>
+          </div>
+          <div class="nav-item" data-filter="images">
+            <i class="fa-solid fa-image icon"></i>
+            <span>Imágenes</span>
+          </div>
+          <div class="nav-item" data-filter="videos">
+            <i class="fa-solid fa-film icon"></i>
+            <span>Videos</span>
+          </div>
+        </div>
+
+        <div class="nav-section">
+          <div class="nav-title">Herramientas</div>
+          <div class="nav-item" id="btnCompact">
+            <i class="fa-solid fa-broom icon"></i>
+            <span>Compactar DB</span>
+          </div>
+        </div>
+
+        <div class="disk-meter-box">
+          <div class="disk-info">
+            <span>Disco (/home)</span>
+            <span style="color: var(--accent-purple); font-weight: 700;">342 GB libres</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill"></div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- View Area -->
+      <main class="view-pane">
+        <div class="path-toolbar">
+          <div class="breadcrumb">
+            <i class="fa-solid fa-folder-open" style="color: var(--accent-purple);"></i>
+            <span>home</span>
+            <span class="crumb-sep">/</span>
+            <span>usuario</span>
+            <span class="crumb-sep">/</span>
+            <span style="color: var(--text-main);">Proyectos</span>
+          </div>
+
+          <div style="display: flex; gap: 10px;">
+            <button class="btn btn-secondary" id="btnRefresh">
+              <i class="fa-solid fa-rotate-right"></i> Actualizar
+            </button>
+            <button class="btn btn-primary" id="btnScanRust">
+              <i class="fa-solid fa-bolt"></i> Indexar con Rust
+            </button>
+          </div>
+        </div>
+
+        <!-- Files Grid -->
+        <div class="files-grid" id="filesGrid">
+          <div class="file-card" data-type="dir">
+            <div class="file-icon-box folder-icon"><i class="fa-solid fa-folder"></i></div>
+            <div class="file-title">fork-baloo</div>
+            <div class="file-meta">Carpeta • 14 elem.</div>
+          </div>
+
+          <div class="file-card" data-type="code">
+            <div class="file-icon-box code-icon"><i class="fa-solid fa-cube"></i></div>
+            <div class="file-title">baloo-indexer-rust</div>
+            <div class="file-meta">Proyecto Rust • 42 KB</div>
+          </div>
+
+          <div class="file-card" data-type="code">
+            <div class="file-icon-box code-icon"><i class="fa-brands fa-rust"></i></div>
+            <div class="file-title">indexer.rs</div>
+            <div class="file-meta">Rust Source • 4.2 KB</div>
+          </div>
+
+          <div class="file-card" data-type="code">
+            <div class="file-icon-box code-icon"><i class="fa-solid fa-file-code"></i></div>
+            <div class="file-title">database.cpp</div>
+            <div class="file-meta">C++ Source • 7.5 KB</div>
+          </div>
+
+          <div class="file-card" data-type="pdf">
+            <div class="file-icon-box pdf-icon"><i class="fa-solid fa-file-pdf"></i></div>
+            <div class="file-title">arquitectura_baloo.pdf</div>
+            <div class="file-meta">PDF • 2.1 MB</div>
+          </div>
+
+          <div class="file-card" data-type="images">
+            <div class="file-icon-box image-icon"><i class="fa-solid fa-image"></i></div>
+            <div class="file-title">file_manager_dark.jpg</div>
+            <div class="file-meta">Imagen JPEG • 480 KB</div>
+          </div>
+
+          <div class="file-card" data-type="videos">
+            <div class="file-icon-box media-icon"><i class="fa-solid fa-video"></i></div>
+            <div class="file-title">demo_baloo_rust.mp4</div>
+            <div class="file-meta">Video MP4 • 185 MB</div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
