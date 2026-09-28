@@ -441,14 +441,16 @@ ApplicationWindow {
                                         onObjectRemoved: (index, object) => openWithMenu.removeItem(object)
                                         delegate: MenuItem {
                                             required property var modelData
-                                            text: modelData.name
+                                            text: (modelData.isRecommended ? "⭐ " : "📱 ") + modelData.name
                                             onTriggered: fsModel.launchWithApp(path, modelData.cmd)
                                         }
                                     }
 
+                                    MenuSeparator {}
+
                                     MenuItem {
-                                        text: "⚙️ Aplicación por defecto"
-                                        onTriggered: fsModel.openItem(path, false)
+                                        text: "🔍 Buscar todas las aplicaciones del sistema..."
+                                        onTriggered: appSelectorDialog.openForFile(path, name)
                                     }
                                 }
 
@@ -482,6 +484,148 @@ ApplicationWindow {
                             }
                         }
 
+                    }
+                }
+            }
+        }
+    }
+
+    // Modal Dialog to Search & Choose Any System Application
+    Dialog {
+        id: appSelectorDialog
+        title: "Elegir aplicación del sistema"
+        modal: true
+        focus: true
+        width: 580
+        height: 520
+        x: Math.round((parent.width - width) / 2)
+        y: Math.round((parent.height - height) / 2)
+
+        property string targetPath: ""
+        property string targetName: ""
+        property var allAppsList: []
+
+        function openForFile(filePath, fileName) {
+            targetPath = filePath
+            targetName = fileName
+            allAppsList = fsModel.getOpenWithApps(filePath)
+            appSearchInput.text = ""
+            open()
+        }
+
+        background: Rectangle {
+            color: bgSurface
+            radius: 16
+            border.color: borderGlow
+            border.width: 1
+        }
+
+        contentItem: ColumnLayout {
+            spacing: 12
+
+            Text {
+                text: "🚀 Abrir \"" + targetName + "\" con:"
+                color: textMain
+                font.pixelSize: 16
+                font.bold: true
+            }
+
+            TextField {
+                id: appSearchInput
+                placeholderText: "🔍 Buscar aplicación (ej: Chrome, Edge, Firefox, Code, VLC)..."
+                placeholderTextColor: textMuted
+                color: textMain
+                font.pixelSize: 13
+                Layout.fillWidth: true
+                background: Rectangle {
+                    color: bgCard
+                    radius: 10
+                    border.color: appSearchInput.activeFocus ? wineRedNeon : borderGlow
+                    border.width: 1
+                }
+            }
+
+            ScrollView {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                clip: true
+
+                ListView {
+                    id: appListView
+                    width: parent.width
+                    spacing: 6
+                    model: {
+                        var query = appSearchInput.text.trimmed().toLowerCase()
+                        if (query === "") return allAppsList
+                        return allAppsList.filter(function(app) {
+                            return app.name.toLowerCase().indexOf(query) !== -1 || app.cmd.toLowerCase().indexOf(query) !== -1
+                        })
+                    }
+
+                    delegate: Rectangle {
+                        width: appListView.width - 12
+                        height: 46
+                        color: itemMouseArea.containsMouse ? wineRed : bgCard
+                        radius: 10
+
+                        RowLayout {
+                            anchors.fill: parent
+                            anchors.margins: 10
+                            spacing: 12
+
+                            Text {
+                                text: modelData.isRecommended ? "⭐" : "📱"
+                                font.pixelSize: 16
+                            }
+
+                            ColumnLayout {
+                                Layout.fillWidth: true
+                                spacing: 2
+
+                                Text {
+                                    text: modelData.name
+                                    color: textMain
+                                    font.pixelSize: 13
+                                    font.bold: true
+                                    elide: Text.ElideRight
+                                }
+
+                                Text {
+                                    text: modelData.cmd
+                                    color: textMuted
+                                    font.pixelSize: 10
+                                    elide: Text.ElideRight
+                                }
+                            }
+
+                            Button {
+                                text: "Abrir"
+                                contentItem: Text {
+                                    text: parent.text
+                                    color: "#ffffff"
+                                    font.bold: true
+                                    font.pixelSize: 11
+                                }
+                                background: Rectangle {
+                                    color: parent.hovered ? wineRedBright : wineRedNeon
+                                    radius: 6
+                                }
+                                onClicked: {
+                                    fsModel.launchWithApp(targetPath, modelData.cmd)
+                                    appSelectorDialog.close()
+                                }
+                            }
+                        }
+
+                        MouseArea {
+                            id: itemMouseArea
+                            anchors.fill: parent
+                            hoverEnabled: true
+                            onDoubleClicked: {
+                                fsModel.launchWithApp(targetPath, modelData.cmd)
+                                appSelectorDialog.close()
+                            }
+                        }
                     }
                 }
             }

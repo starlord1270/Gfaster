@@ -1,8 +1,165 @@
 #include "filesystemmodel.h"
-#include <QStorageInfo>
-#include <QStandardPaths>
 #include <QDebug>
+#include <QMimeDatabase>
+#include <QMimeType>
 #include <QProcess>
+#include <QSettings>
+#include <QStandardPaths>
+#include <QStorageInfo>
+
+QVariantList FileSystemModel::getOpenWithApps(const QString &path)
+{
+    QVariantList result;
+    QFileInfo fi(path);
+    if (!fi.exists())
+        return result;
+
+    QMimeDatabase mimeDb;
+    QMimeType fileMime = mimeDb.mimeTypeForFile(path);
+    QString mimeName = fileMime.name().toLower();
+    QString ext = fi.suffix().toLower();
+
+    QStringList searchDirs = {QStringLiteral("/usr/share/applications"),
+                              QStringLiteral("/usr/local/share/applications"),
+                              QDir::homePath() + QStringLiteral("/.local/share/applications"),
+                              QStringLiteral("/var/lib/flatpak/exports/share/applications"),
+                              QDir::homePath() + QStringLiteral("/.local/share/flatpak/exports/share/applications")};
+
+    QSet<QString> seenKeys;
+
+    struct AppItem {
+        QString name;
+        QString cmd;
+        QString icon;
+        bool isRecommended;
+    };
+    QList<AppItem> appList;
+
+    for (const QString &dirPath : searchDirs) {
+        QDir dir(dirPath);
+        if (!dir.exists())
+            continue;
+
+        const QStringList entries = dir.entryList(QStringList() << QStringLiteral("*.desktop"), QDir::Files);
+        for (const QString &fileName : entries) {
+            QString fullPath = dir.absoluteFilePath(fileName);
+            QSettings desktop(fullPath, QSettings::IniFormat);
+            desktop.beginGroup(QStringLiteral("Desktop Entry"));
+
+            QString type = desktop.value(QStringLiteral("Type")).toString();
+            bool noDisplay = desktop.value(QStringLiteral("NoDisplay"), false).toBool();
+            if (type != QLatin1String("Application") || noDisplay) {
+                desktop.endGroup();
+                continue;
+            }
+
+            QString name = desktop.value(QStringLiteral("Name[es]")).toString();
+            if (name.isEmpty())
+                name = desktop.value(QStringLiteral("Name[es_ES]")).toString();
+            if (name.isEmpty())
+                name = desktop.value(QStringLiteral("Name")).toString();
+
+            QString execStr = desktop.value(QStringLiteral("Exec")).toString();
+            QString iconStr = desktop.value(QStringLiteral("Icon")).toString();
+            QString mimeTypesStr = desktop.value(QStringLiteral("MimeType")).toString();
+
+            desktop.endGroup();
+
+            if (name.isEmpty() || execStr.isEmpty())
+                continue;
+
+            QString cleanCmd = execStr;
+            cleanCmd.remove(QStringLiteral("%f"))
+                .remove(QStringLiteral("%F"))
+                .remove(QStringLiteral("%u"))
+                .remove(QStringLiteral("%U"))
+                .remove(QStringLiteral("%i"))
+                .remove(QStringLiteral("%c"))
+                .remove(QStringLiteral("%k"));
+            cleanCmd = cleanCmd.trimmed();
+
+            if (cleanCmd.isEmpty())
+                continue;
+
+            QString key = name.toLower() + QLatin1Char('|') + cleanCmd.toLower();
+            if (seenKeys.contains(key))
+                continue;
+            seenKeys.insert(key);
+
+            bool isRecommended = false;
+            if (!mimeTypesStr.isEmpty()) {
+                QStringList mimes = mimeTypesStr.split(QLatin1Char(';'), Qt::SkipEmptyParts);
+                for (const QString &m : mimes) {
+                    QString mLower = m.trimmed().toLower();
+                    if ((!mimeName.isEmpty() && mLower == mimeName) || (!ext.isEmpty() && mLower.contains(ext))) {
+                        isRecommended = true;
+                        break;
+                    }
+                }
+            }
+
+            // Browser matching helper
+            if (ext == QLatin1String("html") || ext == QLatin1String("htm") || ext == QLatin1String("url") || mimeName.contains(QStringLiteral("html"))) {
+                if (cleanCmd.contains(QStringLiteral("chrome")) || cleanCmd.contains(QStringLiteral("firefox")) || cleanCmd.contains(QStringLiteral("edge"))
+                    || cleanCmd.contains(QStringLiteral("brave")) || cleanCmd.contains(QStringLiteral("vivaldi"))
+                    || cleanCmd.contains(QStringLiteral("opera"))) {
+                    isRecommended = true;
+                }
+            }
+
+            AppItem item;
+            item.name = name;
+            item.cmd = cleanCmd;
+            item.icon = iconStr;
+            item.isRecommended = isRecommended;
+            appList.append(item);
+        }
+    }
+
+    std::sort(appList.begin(), appList.end(), [](const AppItem &a, const AppItem &b) {
+        if (a.isRecommended != b.isRecommended) {
+            return a.isRecommended > b.isRecommended;
+        }
+        return a.name.localeAwareCompare(b.name) < 0;
+    });
+
+    for (const AppItem &app : appList) {
+        QVariantMap map;
+        map[QStringLiteral("name")] = app.name;
+        map[QStringLiteral("cmd")] = app.cmd;
+        map[QStringLiteral("icon")] = app.icon;
+        map[QStringLiteral("isRecommended")] = app.isRecommended;
+        result.append(map);
+    }
+
+    return result;
+}
+
+void FileSystemModel::launchWithApp(const QString &path, const QString &execCmd)
+{
+    qDebug() << "[GFaster] Launching path:" << path << "with app cmd:" << execCmd;
+    if (path.isEmpty() || execCmd.isEmpty())
+        return;
+
+    QString cleanCmd = execCmd;
+    cleanCmd.remove(QStringLiteral("%f"))
+        .remove(QStringLiteral("%F"))
+        .remove(QStringLiteral("%u"))
+        .remove(QStringLiteral("%U"))
+        .remove(QStringLiteral("%i"))
+        .remove(QStringLiteral("%c"))
+        .remove(QStringLiteral("%k"));
+    cleanCmd = cleanCmd.trimmed();
+
+    QStringList parts = QProcess::splitCommand(cleanCmd);
+    if (!parts.isEmpty()) {
+        QString program = parts.takeFirst();
+        parts.append(path);
+        QProcess::startDetached(program, parts);
+    } else {
+        QProcess::startDetached(cleanCmd, QStringList() << path);
+    }
+}
 
 FileSystemModel::FileSystemModel(QObject *parent)
     : QAbstractListModel(parent)
@@ -170,66 +327,6 @@ QString FileSystemModel::getFreeSpaceForPath(const QString &path)
         return formatSize(storage.bytesAvailable()) + QStringLiteral(" libres");
     }
     return QString();
-}
-
-QVariantList FileSystemModel::getOpenWithApps(const QString &path)
-{
-    QVariantList apps;
-    QFileInfo fi(path);
-    if (!fi.exists())
-        return apps;
-
-    QString ext = fi.suffix().toLower();
-
-    auto addApp = [&](const QString &bin, const QString &name, const QString &cmd) {
-        if (QFile::exists(bin)) {
-            QVariantMap map;
-            map[QStringLiteral("name")] = name;
-            map[QStringLiteral("cmd")] = cmd;
-            apps.append(map);
-        }
-    };
-
-    if (ext == QLatin1String("mp4") || ext == QLatin1String("mkv") || ext == QLatin1String("avi") || ext == QLatin1String("mov") || ext == QLatin1String("webm")
-        || ext == QLatin1String("flv") || ext == QLatin1String("wmv")) {
-        addApp(QStringLiteral("/usr/bin/vlc"), QStringLiteral("VLC Media Player"), QStringLiteral("vlc"));
-        addApp(QStringLiteral("/usr/bin/mpv"), QStringLiteral("mpv Player"), QStringLiteral("mpv"));
-        addApp(QStringLiteral("/usr/bin/dragon"), QStringLiteral("Dragon Player"), QStringLiteral("dragon"));
-        addApp(QStringLiteral("/usr/bin/haruna"), QStringLiteral("Haruna Video Player"), QStringLiteral("haruna"));
-        addApp(QStringLiteral("/usr/bin/gwenview"), QStringLiteral("Gwenview"), QStringLiteral("gwenview"));
-    } else if (ext == QLatin1String("png") || ext == QLatin1String("jpg") || ext == QLatin1String("jpeg") || ext == QLatin1String("gif")
-               || ext == QLatin1String("svg") || ext == QLatin1String("webp") || ext == QLatin1String("bmp")) {
-        addApp(QStringLiteral("/usr/bin/gwenview"), QStringLiteral("Gwenview"), QStringLiteral("gwenview"));
-        addApp(QStringLiteral("/usr/bin/gimp"), QStringLiteral("GIMP Image Editor"), QStringLiteral("gimp"));
-        addApp(QStringLiteral("/usr/bin/okular"), QStringLiteral("Okular"), QStringLiteral("okular"));
-        addApp(QStringLiteral("/usr/bin/firefox"), QStringLiteral("Firefox"), QStringLiteral("firefox"));
-    } else if (ext == QLatin1String("mp3") || ext == QLatin1String("wav") || ext == QLatin1String("flac") || ext == QLatin1String("aac")
-               || ext == QLatin1String("ogg") || ext == QLatin1String("m4a")) {
-        addApp(QStringLiteral("/usr/bin/vlc"), QStringLiteral("VLC Media Player"), QStringLiteral("vlc"));
-        addApp(QStringLiteral("/usr/bin/elisa"), QStringLiteral("Elisa Music Player"), QStringLiteral("elisa"));
-        addApp(QStringLiteral("/usr/bin/audacious"), QStringLiteral("Audacious"), QStringLiteral("audacious"));
-        addApp(QStringLiteral("/usr/bin/mpv"), QStringLiteral("mpv"), QStringLiteral("mpv"));
-    } else if (ext == QLatin1String("pdf")) {
-        addApp(QStringLiteral("/usr/bin/okular"), QStringLiteral("Okular Document Viewer"), QStringLiteral("okular"));
-        addApp(QStringLiteral("/usr/bin/evince"), QStringLiteral("Evince PDF Reader"), QStringLiteral("evince"));
-        addApp(QStringLiteral("/usr/bin/firefox"), QStringLiteral("Firefox Browser"), QStringLiteral("firefox"));
-    } else if (ext == QLatin1String("zip") || ext == QLatin1String("tar") || ext == QLatin1String("gz") || ext == QLatin1String("7z")
-               || ext == QLatin1String("rar")) {
-        addApp(QStringLiteral("/usr/bin/ark"), QStringLiteral("Ark Archiver"), QStringLiteral("ark"));
-        addApp(QStringLiteral("/usr/bin/file-roller"), QStringLiteral("File Roller"), QStringLiteral("file-roller"));
-    } else {
-        addApp(QStringLiteral("/usr/bin/code"), QStringLiteral("Visual Studio Code"), QStringLiteral("code"));
-        addApp(QStringLiteral("/usr/bin/kate"), QStringLiteral("Kate Text Editor"), QStringLiteral("kate"));
-        addApp(QStringLiteral("/usr/bin/kwrite"), QStringLiteral("KWrite"), QStringLiteral("kwrite"));
-    }
-
-    return apps;
-}
-
-void FileSystemModel::launchWithApp(const QString &path, const QString &execCmd)
-{
-    qDebug() << "[GFaster] Launching" << path << "with application:" << execCmd;
-    QProcess::startDetached(execCmd, QStringList() << path);
 }
 
 void FileSystemModel::searchFiles(const QString &query)
