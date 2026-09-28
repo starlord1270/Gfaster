@@ -56,6 +56,8 @@ public:
     Q_INVOKABLE void renameItem(const QString &oldPath, const QString &newName);
     Q_INVOKABLE void openInTerminal(const QString &path);
     Q_INVOKABLE QString getFreeSpaceForPath(const QString &path);
+    Q_INVOKABLE QVariantList getOpenWithApps(const QString &path);
+    Q_INVOKABLE void launchWithApp(const QString &path, const QString &execCmd);
     Q_INVOKABLE void searchFiles(const QString &query);
     Q_INVOKABLE void compactDatabase();
 

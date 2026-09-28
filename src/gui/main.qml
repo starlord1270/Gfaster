@@ -27,6 +27,9 @@ ApplicationWindow {
     readonly property color textMain: "#f5f5f7"
     readonly property color textMuted: "#b89da7"
 
+    // Dynamic Zoom Level for Icons & Text
+    property real zoomScale: 1.0
+
     Item {
         anchors.fill: parent
 
@@ -249,6 +252,50 @@ ApplicationWindow {
                         }
                     }
 
+                    // Zoom Controls (Aumentar / Reducir Letra e Iconos)
+                    RowLayout {
+                        spacing: 4
+
+                        Button {
+                            text: "➖ Zoom"
+                            contentItem: Text {
+                                text: parent.text
+                                color: textMain
+                                font.pixelSize: 11
+                                font.bold: true
+                            }
+                            background: Rectangle {
+                                color: parent.hovered ? bgCardHover : bgCard
+                                radius: 8
+                            }
+                            onClicked: zoomScale = Math.max(0.6, zoomScale - 0.15)
+                        }
+
+                        Text {
+                            text: Math.round(zoomScale * 100) + "%"
+                            color: wineRedNeon
+                            font.pixelSize: 11
+                            font.bold: true
+                            Layout.leftMargin: 2
+                            Layout.rightMargin: 2
+                        }
+
+                        Button {
+                            text: "➕ Zoom"
+                            contentItem: Text {
+                                text: parent.text
+                                color: textMain
+                                font.pixelSize: 11
+                                font.bold: true
+                            }
+                            background: Rectangle {
+                                color: parent.hovered ? bgCardHover : bgCard
+                                radius: 8
+                            }
+                            onClicked: zoomScale = Math.min(2.0, zoomScale + 0.15)
+                        }
+                    }
+
                     // Search Input
                     TextField {
                         id: searchBox
@@ -256,7 +303,7 @@ ApplicationWindow {
                         placeholderTextColor: textMuted
                         color: textMain
                         font.pixelSize: 13
-                        Layout.preferredWidth: 300
+                        Layout.preferredWidth: 260
                         background: Rectangle {
                             color: bgSurface
                             radius: 10
@@ -272,8 +319,8 @@ ApplicationWindow {
                     id: gridView
                     Layout.fillWidth: true
                     Layout.fillHeight: true
-                    cellWidth: 175
-                    cellHeight: 155
+                    cellWidth: Math.round(175 * zoomScale)
+                    cellHeight: Math.round(160 * zoomScale)
                     clip: true
                     model: fsModel
 
@@ -296,27 +343,51 @@ ApplicationWindow {
                     }
 
                     delegate: Rectangle {
-                        width: 160
-                        height: 140
+                        id: cardDelegate
+                        width: Math.round(160 * zoomScale)
+                        height: Math.round(145 * zoomScale)
                         color: mouseArea.containsMouse ? bgCardHover : bgCard
-                        radius: 14
+                        radius: Math.round(14 * zoomScale)
                         border.width: 0  // Frameless card
+
+                        // Extension Badge Pill (Top-Right of file card)
+                        Rectangle {
+                            anchors.top: parent.top
+                            anchors.right: parent.right
+                            anchors.topMargin: Math.round(8 * zoomScale)
+                            anchors.rightMargin: Math.round(8 * zoomScale)
+                            visible: !isDir && typeStr !== "" && typeStr !== "Carpeta"
+                            color: wineRed
+                            radius: Math.round(4 * zoomScale)
+                            implicitWidth: extLabel.implicitWidth + Math.round(8 * zoomScale)
+                            implicitHeight: extLabel.implicitHeight + Math.round(4 * zoomScale)
+                            z: 2
+
+                            Text {
+                                id: extLabel
+                                anchors.centerIn: parent
+                                text: typeStr
+                                color: "#ffffff"
+                                font.pixelSize: Math.max(7, Math.round(9 * zoomScale))
+                                font.bold: true
+                            }
+                        }
 
                         ColumnLayout {
                             anchors.centerIn: parent
-                            spacing: 6
-                            width: parent.width - 20
+                            spacing: Math.round(6 * zoomScale)
+                            width: parent.width - Math.round(20 * zoomScale)
 
                             Text {
                                 text: iconName
-                                font.pixelSize: 44
+                                font.pixelSize: Math.round(44 * zoomScale)
                                 Layout.alignment: Qt.AlignHCenter
                             }
 
                             Text {
                                 text: name
                                 color: textMain
-                                font.pixelSize: 12
+                                font.pixelSize: Math.max(9, Math.round(12 * zoomScale))
                                 font.bold: true
                                 elide: Text.ElideRight
                                 Layout.fillWidth: true
@@ -326,7 +397,7 @@ ApplicationWindow {
                             Text {
                                 text: sizeStr
                                 color: wineRedNeon
-                                font.pixelSize: 10
+                                font.pixelSize: Math.max(8, Math.round(10 * zoomScale))
                                 Layout.alignment: Qt.AlignHCenter
                             }
                         }
@@ -353,15 +424,57 @@ ApplicationWindow {
 
                             Menu {
                                 id: itemContextMenu
+
                                 MenuItem {
-                                    text: isDir ? "📂 Abrir Carpeta" : "▶ Abrir Archivo / Ejecutar"
+                                    text: isDir ? "📂 Abrir Carpeta" : "▶ Abrir Archivo"
                                     onTriggered: fsModel.openItem(path, isDir)
                                 }
+
+                                Menu {
+                                    id: openWithMenu
+                                    title: "🚀 Abrir con..."
+                                    visible: !isDir
+
+                                    Instantiator {
+                                        model: fsModel.getOpenWithApps(path)
+                                        onObjectAdded: (index, object) => openWithMenu.insertItem(index, object)
+                                        onObjectRemoved: (index, object) => openWithMenu.removeItem(object)
+                                        delegate: MenuItem {
+                                            required property var modelData
+                                            text: modelData.name
+                                            onTriggered: fsModel.launchWithApp(path, modelData.cmd)
+                                        }
+                                    }
+
+                                    MenuItem {
+                                        text: "⚙️ Aplicación por defecto"
+                                        onTriggered: fsModel.openItem(path, false)
+                                    }
+                                }
+
+                                Menu {
+                                    title: "🔍 Tamaño de letras e iconos"
+                                    MenuItem {
+                                        text: "➕ Aumentar (Zoom +)"
+                                        onTriggered: zoomScale = Math.min(2.0, zoomScale + 0.15)
+                                    }
+                                    MenuItem {
+                                        text: "➖ Reducir (Zoom -)"
+                                        onTriggered: zoomScale = Math.max(0.6, zoomScale - 0.15)
+                                    }
+                                    MenuItem {
+                                        text: "🔄 Normal (100%)"
+                                        onTriggered: zoomScale = 1.0
+                                    }
+                                }
+
                                 MenuItem {
                                     text: "🖥️ Abrir en Terminal"
                                     onTriggered: fsModel.openInTerminal(path)
                                 }
+
                                 MenuSeparator {}
+
                                 MenuItem {
                                     text: "🗑️ Eliminar"
                                     onTriggered: fsModel.deleteItem(path)

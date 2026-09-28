@@ -172,6 +172,66 @@ QString FileSystemModel::getFreeSpaceForPath(const QString &path)
     return QString();
 }
 
+QVariantList FileSystemModel::getOpenWithApps(const QString &path)
+{
+    QVariantList apps;
+    QFileInfo fi(path);
+    if (!fi.exists())
+        return apps;
+
+    QString ext = fi.suffix().toLower();
+
+    auto addApp = [&](const QString &bin, const QString &name, const QString &cmd) {
+        if (QFile::exists(bin)) {
+            QVariantMap map;
+            map[QStringLiteral("name")] = name;
+            map[QStringLiteral("cmd")] = cmd;
+            apps.append(map);
+        }
+    };
+
+    if (ext == QLatin1String("mp4") || ext == QLatin1String("mkv") || ext == QLatin1String("avi") || ext == QLatin1String("mov") || ext == QLatin1String("webm")
+        || ext == QLatin1String("flv") || ext == QLatin1String("wmv")) {
+        addApp(QStringLiteral("/usr/bin/vlc"), QStringLiteral("VLC Media Player"), QStringLiteral("vlc"));
+        addApp(QStringLiteral("/usr/bin/mpv"), QStringLiteral("mpv Player"), QStringLiteral("mpv"));
+        addApp(QStringLiteral("/usr/bin/dragon"), QStringLiteral("Dragon Player"), QStringLiteral("dragon"));
+        addApp(QStringLiteral("/usr/bin/haruna"), QStringLiteral("Haruna Video Player"), QStringLiteral("haruna"));
+        addApp(QStringLiteral("/usr/bin/gwenview"), QStringLiteral("Gwenview"), QStringLiteral("gwenview"));
+    } else if (ext == QLatin1String("png") || ext == QLatin1String("jpg") || ext == QLatin1String("jpeg") || ext == QLatin1String("gif")
+               || ext == QLatin1String("svg") || ext == QLatin1String("webp") || ext == QLatin1String("bmp")) {
+        addApp(QStringLiteral("/usr/bin/gwenview"), QStringLiteral("Gwenview"), QStringLiteral("gwenview"));
+        addApp(QStringLiteral("/usr/bin/gimp"), QStringLiteral("GIMP Image Editor"), QStringLiteral("gimp"));
+        addApp(QStringLiteral("/usr/bin/okular"), QStringLiteral("Okular"), QStringLiteral("okular"));
+        addApp(QStringLiteral("/usr/bin/firefox"), QStringLiteral("Firefox"), QStringLiteral("firefox"));
+    } else if (ext == QLatin1String("mp3") || ext == QLatin1String("wav") || ext == QLatin1String("flac") || ext == QLatin1String("aac")
+               || ext == QLatin1String("ogg") || ext == QLatin1String("m4a")) {
+        addApp(QStringLiteral("/usr/bin/vlc"), QStringLiteral("VLC Media Player"), QStringLiteral("vlc"));
+        addApp(QStringLiteral("/usr/bin/elisa"), QStringLiteral("Elisa Music Player"), QStringLiteral("elisa"));
+        addApp(QStringLiteral("/usr/bin/audacious"), QStringLiteral("Audacious"), QStringLiteral("audacious"));
+        addApp(QStringLiteral("/usr/bin/mpv"), QStringLiteral("mpv"), QStringLiteral("mpv"));
+    } else if (ext == QLatin1String("pdf")) {
+        addApp(QStringLiteral("/usr/bin/okular"), QStringLiteral("Okular Document Viewer"), QStringLiteral("okular"));
+        addApp(QStringLiteral("/usr/bin/evince"), QStringLiteral("Evince PDF Reader"), QStringLiteral("evince"));
+        addApp(QStringLiteral("/usr/bin/firefox"), QStringLiteral("Firefox Browser"), QStringLiteral("firefox"));
+    } else if (ext == QLatin1String("zip") || ext == QLatin1String("tar") || ext == QLatin1String("gz") || ext == QLatin1String("7z")
+               || ext == QLatin1String("rar")) {
+        addApp(QStringLiteral("/usr/bin/ark"), QStringLiteral("Ark Archiver"), QStringLiteral("ark"));
+        addApp(QStringLiteral("/usr/bin/file-roller"), QStringLiteral("File Roller"), QStringLiteral("file-roller"));
+    } else {
+        addApp(QStringLiteral("/usr/bin/code"), QStringLiteral("Visual Studio Code"), QStringLiteral("code"));
+        addApp(QStringLiteral("/usr/bin/kate"), QStringLiteral("Kate Text Editor"), QStringLiteral("kate"));
+        addApp(QStringLiteral("/usr/bin/kwrite"), QStringLiteral("KWrite"), QStringLiteral("kwrite"));
+    }
+
+    return apps;
+}
+
+void FileSystemModel::launchWithApp(const QString &path, const QString &execCmd)
+{
+    qDebug() << "[GFaster] Launching" << path << "with application:" << execCmd;
+    QProcess::startDetached(execCmd, QStringList() << path);
+}
+
 void FileSystemModel::searchFiles(const QString &query)
 {
     m_pendingQuery = query.trimmed();
