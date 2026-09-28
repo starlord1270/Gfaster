@@ -6,6 +6,8 @@
 #include <QDir>
 #include <QFileInfo>
 #include <QProcess>
+#include <QSet>
+#include <QTimer>
 #include <QUrl>
 
 struct FileItem {
@@ -63,6 +65,10 @@ Q_SIGNALS:
     void freeSpaceStrChanged();
     void compactFinished(bool success, const QString &message);
 
+private Q_SLOTS:
+    void performSearch();
+    void onSearchProcessFinished(int exitCode, QProcess::ExitStatus exitStatus);
+
 private:
     void loadDirectory(const QString &path);
     QString formatSize(qint64 bytes) const;
@@ -70,6 +76,11 @@ private:
     QString m_currentPath;
     QString m_freeSpaceStr;
     QList<FileItem> m_items;
+
+    QProcess *m_searchProcess;
+    QTimer *m_searchTimer;
+    QString m_pendingQuery;
+    QSet<QString> m_addedSearchPaths;
 };
 
 #endif // FILESYSTEMMODEL_H

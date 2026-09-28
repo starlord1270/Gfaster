@@ -49,10 +49,9 @@ impl IndexDatabase {
         let mut results = Vec::new();
         let mut seen_paths = HashSet::new();
 
-        // 1. Instant term index lookup (< 1ms)
+        // 1. Instant term prefix index lookup (< 0.1 ms)
         if let Ok(terms_tree) = self.db.open_tree("terms") {
-            let prefix = format!("{}:", query_lower);
-            for item in terms_tree.scan_prefix(prefix.as_bytes()) {
+            for item in terms_tree.scan_prefix(query_lower.as_bytes()) {
                 if let Ok((_, path_bytes)) = item {
                     if let Ok(Some(val)) = self.db.get(&path_bytes) {
                         if let Ok(entry) = serde_json::from_slice::<FileEntry>(&val) {
@@ -68,9 +67,14 @@ impl IndexDatabase {
             }
         }
 
-        // 2. Secondary prefix fallback if term match is empty
-        if results.len() < 50 {
+        // 2. Fast bounded fallback scan if term match is empty
+        if results.is_empty() {
+            let mut scanned = 0;
             for item in self.db.iter() {
+                scanned += 1;
+                if scanned > 2000 {
+                    break;
+                }
                 if let Ok((_, value)) = item {
                     if let Ok(entry) = serde_json::from_slice::<FileEntry>(&value) {
                         if entry.filename.to_lowercase().contains(&query_lower)
@@ -87,6 +91,7 @@ impl IndexDatabase {
                 }
             }
         }
+
 
         results
     }
