@@ -1,14 +1,14 @@
-#include <QGuiApplication>
+#include "filesystemmodel.h"
+#include <QApplication>
+#include <QDir>
+#include <QFile>
+#include <QIcon>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
-#include <QIcon>
-#include <QFile>
-#include <QDir>
-#include "filesystemmodel.h"
 
 int main(int argc, char *argv[])
 {
-    QGuiApplication app(argc, argv);
+    QApplication app(argc, argv);
 
     app.setOrganizationName(QStringLiteral("GFaster"));
     app.setApplicationName(QStringLiteral("GFaster File Manager"));
