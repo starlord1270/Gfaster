@@ -267,7 +267,7 @@ ApplicationWindow {
                     }
                 }
 
-                // Grid View of Folder Cards (NO OUTLINE BORDER)
+                // Grid View of Folder Cards with Right ScrollBar
                 GridView {
                     id: gridView
                     Layout.fillWidth: true
@@ -277,12 +277,30 @@ ApplicationWindow {
                     clip: true
                     model: fsModel
 
+                    // Right ScrollBar for vertical scrolling
+                    ScrollBar.vertical: ScrollBar {
+                        id: verticalScrollBar
+                        active: true
+                        policy: ScrollBar.AlwaysOn
+                        contentItem: Rectangle {
+                            implicitWidth: 8
+                            implicitHeight: 100
+                            radius: 4
+                            color: verticalScrollBar.pressed ? wineRedNeon : (verticalScrollBar.hovered ? wineRedBright : wineRed)
+                        }
+                        background: Rectangle {
+                            implicitWidth: 8
+                            color: "#160e12"
+                            radius: 4
+                        }
+                    }
+
                     delegate: Rectangle {
                         width: 160
                         height: 140
                         color: mouseArea.containsMouse ? bgCardHover : bgCard
                         radius: 14
-                        border.width: 0  // NO OUTLINE BORDER!
+                        border.width: 0  // Frameless card
 
                         ColumnLayout {
                             anchors.centerIn: parent
@@ -290,7 +308,7 @@ ApplicationWindow {
                             width: parent.width - 20
 
                             Text {
-                                text: isDir ? "📁" : "📄"
+                                text: iconName
                                 font.pixelSize: 44
                                 Layout.alignment: Qt.AlignHCenter
                             }
@@ -317,9 +335,34 @@ ApplicationWindow {
                             id: mouseArea
                             anchors.fill: parent
                             hoverEnabled: true
+                            acceptedButtons: Qt.LeftButton | Qt.RightButton
+
                             onDoubleClicked: {
-                                if (isDir) {
-                                    fsModel.openDir(path)
+                                if (mouse.button === Qt.LeftButton) {
+                                    fsModel.openItem(path, isDir)
+                                }
+                            }
+
+                            onClicked: {
+                                if (mouse.button === Qt.RightButton) {
+                                    itemContextMenu.popup()
+                                }
+                            }
+
+                            Menu {
+                                id: itemContextMenu
+                                MenuItem {
+                                    text: isDir ? "📂 Abrir Carpeta" : "▶ Abrir Archivo / Ejecutar"
+                                    onTriggered: fsModel.openItem(path, isDir)
+                                }
+                                MenuItem {
+                                    text: "🖥️ Abrir en Terminal"
+                                    onTriggered: fsModel.openInTerminal(path)
+                                }
+                                MenuSeparator {}
+                                MenuItem {
+                                    text: "🗑️ Eliminar"
+                                    onTriggered: fsModel.deleteItem(path)
                                 }
                             }
                         }
@@ -351,4 +394,5 @@ ApplicationWindow {
         }
     }
 }
+
 

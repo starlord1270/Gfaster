@@ -2,9 +2,11 @@
 #define FILESYSTEMMODEL_H
 
 #include <QAbstractListModel>
-#include <QFileInfo>
+#include <QDesktopServices>
 #include <QDir>
+#include <QFileInfo>
 #include <QProcess>
+#include <QUrl>
 
 struct FileItem {
     QString name;
@@ -46,6 +48,11 @@ public:
 
     Q_INVOKABLE void openDir(const QString &path);
     Q_INVOKABLE void openParentDir();
+    Q_INVOKABLE void openFile(const QString &path);
+    Q_INVOKABLE void openItem(const QString &path, bool isDir);
+    Q_INVOKABLE void deleteItem(const QString &path);
+    Q_INVOKABLE void renameItem(const QString &oldPath, const QString &newName);
+    Q_INVOKABLE void openInTerminal(const QString &path);
     Q_INVOKABLE void searchFiles(const QString &query);
     Q_INVOKABLE void compactDatabase();
 

@@ -74,6 +74,66 @@ void FileSystemModel::openParentDir()
     }
 }
 
+void FileSystemModel::openFile(const QString &path)
+{
+    QFileInfo fi(path);
+    if (!fi.exists())
+        return;
+
+    if (fi.isExecutable() && !fi.isDir()) {
+        QProcess::startDetached(path, QStringList());
+    } else {
+        QDesktopServices::openUrl(QUrl::fromLocalFile(path));
+    }
+}
+
+void FileSystemModel::openItem(const QString &path, bool isDir)
+{
+    if (isDir) {
+        loadDirectory(path);
+    } else {
+        openFile(path);
+    }
+}
+
+void FileSystemModel::deleteItem(const QString &path)
+{
+    QFileInfo fi(path);
+    if (!fi.exists())
+        return;
+
+    if (fi.isDir()) {
+        QDir dir(path);
+        dir.removeRecursively();
+    } else {
+        QFile::remove(path);
+    }
+    loadDirectory(m_currentPath);
+}
+
+void FileSystemModel::renameItem(const QString &oldPath, const QString &newName)
+{
+    QFileInfo fi(oldPath);
+    if (!fi.exists())
+        return;
+
+    QString newPath = fi.absolutePath() + QDir::separator() + newName;
+    QFile::rename(oldPath, newPath);
+    loadDirectory(m_currentPath);
+}
+
+void FileSystemModel::openInTerminal(const QString &path)
+{
+    QFileInfo fi(path);
+    QString dirPath = fi.isDir() ? fi.absoluteFilePath() : fi.absolutePath();
+
+    if (!QProcess::startDetached(QStringLiteral("konsole"), QStringList() << QStringLiteral("--workdir") << dirPath)) {
+        if (!QProcess::startDetached(QStringLiteral("kitty"), QStringList() << QStringLiteral("--directory") << dirPath)) {
+            QProcess::startDetached(QStringLiteral("x-terminal-emulator"), QStringList(), dirPath);
+        }
+    }
+}
+
 void FileSystemModel::searchFiles(const QString &query)
 {
     if (query.trimmed().isEmpty()) {
@@ -104,7 +164,35 @@ void FileSystemModel::searchFiles(const QString &query)
                         item.isDir = fi.isDir();
                         item.sizeStr = item.isDir ? QStringLiteral("Carpeta") : formatSize(fi.size());
                         item.typeStr = fi.suffix().isEmpty() ? (item.isDir ? QStringLiteral("Directorio") : QStringLiteral("Archivo")) : fi.suffix().toUpper();
-                        item.iconName = item.isDir ? QStringLiteral("folder") : QStringLiteral("document");
+
+                        if (item.isDir) {
+                            item.iconName = QStringLiteral("📁");
+                        } else {
+                            QString ext = fi.suffix().toLower();
+                            if (ext == QLatin1String("mp4") || ext == QLatin1String("mkv") || ext == QLatin1String("avi") || ext == QLatin1String("mov")
+                                || ext == QLatin1String("webm") || ext == QLatin1String("flv") || ext == QLatin1String("wmv") || ext == QLatin1String("m4v")) {
+                                item.iconName = QStringLiteral("🎥");
+                            } else if (ext == QLatin1String("png") || ext == QLatin1String("jpg") || ext == QLatin1String("jpeg") || ext == QLatin1String("gif")
+                                       || ext == QLatin1String("svg") || ext == QLatin1String("webp") || ext == QLatin1String("bmp")) {
+                                item.iconName = QStringLiteral("🖼️");
+                            } else if (ext == QLatin1String("mp3") || ext == QLatin1String("wav") || ext == QLatin1String("flac") || ext == QLatin1String("aac")
+                                       || ext == QLatin1String("ogg") || ext == QLatin1String("m4a")) {
+                                item.iconName = QStringLiteral("🎵");
+                            } else if (ext == QLatin1String("pdf")) {
+                                item.iconName = QStringLiteral("📕");
+                            } else if (ext == QLatin1String("zip") || ext == QLatin1String("tar") || ext == QLatin1String("gz") || ext == QLatin1String("7z")
+                                       || ext == QLatin1String("rar")) {
+                                item.iconName = QStringLiteral("📦");
+                            } else if (ext == QLatin1String("cpp") || ext == QLatin1String("c") || ext == QLatin1String("h") || ext == QLatin1String("py")
+                                       || ext == QLatin1String("rs") || ext == QLatin1String("js") || ext == QLatin1String("ts")
+                                       || ext == QLatin1String("sh")) {
+                                item.iconName = QStringLiteral("📝");
+                            } else if (fi.isExecutable()) {
+                                item.iconName = QStringLiteral("⚙️");
+                            } else {
+                                item.iconName = QStringLiteral("📄");
+                            }
+                        }
                         m_items.append(item);
                     }
                 }
@@ -147,7 +235,35 @@ void FileSystemModel::loadDirectory(const QString &path)
         item.isDir = fi.isDir();
         item.sizeStr = item.isDir ? QStringLiteral("Carpeta") : formatSize(fi.size());
         item.typeStr = fi.suffix().isEmpty() ? (item.isDir ? QStringLiteral("Carpeta") : QStringLiteral("Archivo")) : fi.suffix().toUpper();
-        item.iconName = item.isDir ? QStringLiteral("folder") : QStringLiteral("document");
+
+        if (item.isDir) {
+            item.iconName = QStringLiteral("📁");
+        } else {
+            QString ext = fi.suffix().toLower();
+            if (ext == QLatin1String("mp4") || ext == QLatin1String("mkv") || ext == QLatin1String("avi") || ext == QLatin1String("mov")
+                || ext == QLatin1String("webm") || ext == QLatin1String("flv") || ext == QLatin1String("wmv") || ext == QLatin1String("m4v")) {
+                item.iconName = QStringLiteral("🎥");
+            } else if (ext == QLatin1String("png") || ext == QLatin1String("jpg") || ext == QLatin1String("jpeg") || ext == QLatin1String("gif")
+                       || ext == QLatin1String("svg") || ext == QLatin1String("webp") || ext == QLatin1String("bmp")) {
+                item.iconName = QStringLiteral("🖼️");
+            } else if (ext == QLatin1String("mp3") || ext == QLatin1String("wav") || ext == QLatin1String("flac") || ext == QLatin1String("aac")
+                       || ext == QLatin1String("ogg") || ext == QLatin1String("m4a")) {
+                item.iconName = QStringLiteral("🎵");
+            } else if (ext == QLatin1String("pdf")) {
+                item.iconName = QStringLiteral("📕");
+            } else if (ext == QLatin1String("zip") || ext == QLatin1String("tar") || ext == QLatin1String("gz") || ext == QLatin1String("7z")
+                       || ext == QLatin1String("rar")) {
+                item.iconName = QStringLiteral("📦");
+            } else if (ext == QLatin1String("cpp") || ext == QLatin1String("c") || ext == QLatin1String("h") || ext == QLatin1String("py")
+                       || ext == QLatin1String("rs") || ext == QLatin1String("js") || ext == QLatin1String("ts") || ext == QLatin1String("sh")
+                       || ext == QLatin1String("json") || ext == QLatin1String("md") || ext == QLatin1String("txt")) {
+                item.iconName = QStringLiteral("📝");
+            } else if (fi.isExecutable()) {
+                item.iconName = QStringLiteral("⚙️");
+            } else {
+                item.iconName = QStringLiteral("📄");
+            }
+        }
         m_items.append(item);
     }
 
